@@ -1,0 +1,12 @@
+Cours_Courrier
+390
+30000
+7692
+Moyen_Courrier
+800
+90000
+11250
+Long_Courrier
+1500
+280000
+18666
