@@ -107,11 +107,16 @@ int main() {
                 }
                 stackAvion[0].setTrajet(pp);
 
+
                 for (int i = 0; i < stackAvion[0].getTrajet().size()-1; ++i) {
                     //cout << stackAvion[0].getTrajet()[i] << " ";
+                    stackAvion[0].setnbUT(aero[stackAvion[0].getTrajet()[i]].getDistance(conversionSommetVille(stackAvion[0].getTrajet()[i])+"->"+conversionSommetVille(stackAvion[0].getTrajet()[i+1]))/200);
+                    cout << stackAvion[0].getnbUT()[i] << endl;
+                    float distance = aero[stackAvion[0].getTrajet()[i]].getDistance(conversionSommetVille(stackAvion[0].getTrajet()[i])+"->"+conversionSommetVille(stackAvion[0].getTrajet()[i+1]));
 
-                    int distance = aero[stackAvion[0].getTrajet()[i]].getDistance(conversionSommetVille(stackAvion[0].getTrajet()[i])+"->"+conversionSommetVille(stackAvion[0].getTrajet()[i+1]));
-                    stackAvion[0].setnbUT(distance/200);
+                    stackAvion[0].setAvencement((aero[stackAvion[0].getTrajet()[i+1]].getLoca_x()-aero[stackAvion[0].getTrajet()[i]].getLoca_x())/(distance/200), (aero[stackAvion[0].getTrajet()[i+1]].getLoca_y()-aero[stackAvion[0].getTrajet()[i]].getLoca_y())/(distance/200));
+                    cout << stackAvion[0].getAvnecement_x()[i] << " " << stackAvion[0].getAvnecement_y()[i] << endl;
+
                 }
 
 
