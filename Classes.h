@@ -7,6 +7,10 @@
 #include <vector>
 #include <map>
 #include <ctime>
+#include <SFML/Graphics.hpp>
+
+#define WIDTH 1867
+#define HEIGHT 1080
 
 using namespace std;
 
