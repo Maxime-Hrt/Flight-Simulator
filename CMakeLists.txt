@@ -3,7 +3,7 @@ project(Swimming_pool)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-set(SOURCE_FILES main.cpp aeroport.cpp avion.cpp Classes.h sous_programmes.cpp)
+set(SOURCE_FILES main.cpp aeroport.cpp avion.cpp Classes.h sous_programmes.cpp Graphique.cpp)
 
 add_executable(HelloSFML ${SOURCE_FILES})
 
