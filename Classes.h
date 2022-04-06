@@ -1,6 +1,6 @@
 #ifndef SWIMMING_POOL_CLASSES_H
 #define SWIMMING_POOL_CLASSES_H
-#include <stdio.h>
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -26,12 +26,14 @@ private:
     std::string nomAvion;
     int consomation;
     int reservoir;
-    int positionActuelle; ///la position de l'avion dit dans quel aeroport se trouve l'avion
+    float loca_x, loca_y;
     int cost[100][100], nbs, Sommet_, Adjacence, ponderation_;
     int DistanceAutonomie;
     vector<int> trajet;
     int etat_avion;  ///0 au sol ; 1 en l'air ;
-    int nbUT;
+    vector<float> nbUT;
+    vector<float> avencement_x, avencement_y;
+
 
 public:
     Avion();
@@ -57,13 +59,26 @@ public:
     void ausol(){
         etat_avion=0;
     }
-    void setnbUT(int _nbUT){
-        nbUT=_nbUT;
+    void setnbUT(float _nbUT){
+        nbUT.push_back(_nbUT);
     }
-    int getnbUT(){
+    vector<float> getnbUT(){
         return nbUT;
     }
-
+    void augmenteDistance(int i){
+        loca_x += avencement_x[i];
+        loca_y += avencement_y[i];
+    }
+    void setAvencement(float x, float y){
+        avencement_y.push_back(y);
+        avencement_x.push_back(x);
+    }
+    vector <float> getAvnecement_x(){
+        return avencement_x;
+    }
+    vector <float> getAvnecement_y(){
+        return avencement_y;
+    }
 
 };
 
