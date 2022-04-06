@@ -1,6 +1,7 @@
 #include "Classes.h"
 using namespace sf;
 
+/*
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "SFML Application");
@@ -27,7 +28,7 @@ int main()
         window.display();
     }
 }
-
+*/
 /*
 int main(){
     RenderWindow window(VideoMode(WIDTH, HEIGHT), "Simulateur tour de contrôle");
@@ -59,7 +60,7 @@ int main(){
 */
 
 
-/**
+
 int main() {
     vector<aeroport> aero;
     std::vector<Avion> stackAvion;
@@ -162,4 +163,3 @@ int main() {
 
     return 0;
 }
-*/
