@@ -1,6 +1,6 @@
 0
 Paris
-100 200
+816 428
 4
 12
 6
@@ -21,7 +21,7 @@ Paris->Tokyo
 9707
 1
 Tallinn
-100 200
+916 364
 2
 5
 3
@@ -34,7 +34,7 @@ Tallinn->Paris
 1838
 2
 Tokyo
-100 200
+1484 496
 3
 10
 6
@@ -51,7 +51,7 @@ Tokyo->Tananarive
 11409
 3
 Sydney
-100 200
+1552 900
 4
 10
 6
@@ -64,7 +64,7 @@ Sydney->Dubai
 12044
 4
 Tananarive
-100 200
+1048 798
 1
 4
 11
@@ -79,7 +79,7 @@ Tananarive->Tokyo
 11409
 5
 Chicago
-100 200
+380 466
 8
 13
 5
@@ -94,7 +94,7 @@ Chicago->Santiago
 8536
 6
 Dubai
-100 200
+1084 586
 5
 20
 6
@@ -115,7 +115,7 @@ Dubai->Tananarive
 4971
 7
 Chili
-100 200
+462 884
 2
 8
 5

@@ -22,6 +22,7 @@ void drawSprite(sf::Sprite image){
         sf::Event event;
         cout << globalPosition.x << " " << globalPosition.y << std::endl;
 
+        sf::CircleShape airplane = afficherAvion();
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
@@ -30,10 +31,18 @@ void drawSprite(sf::Sprite image){
 
         window.clear();
         window.draw(image);
+
         window.display();
     }
 }
 
-void drawAvion(){
+void coordoTrajet(aeroport aeroportD, aeroport aeroportF){
 
+}
+
+sf::CircleShape afficherAvion(float x, float y){
+    sf::CircleShape avion(20.f);
+    avion.setFillColor(sf::Color::Blue);
+    avion.setPosition(x, y);
+    return avion;
 }

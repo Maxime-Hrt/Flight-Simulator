@@ -85,6 +85,7 @@ std::string choixavion();
 std::vector<aeroport> remplirAeroAleatoirement(std::vector<aeroport> ListeAeroport);
 void image(string image_path);
 void drawSprite(sf::Sprite image);
-void drawAvion();
+void coordoTrajet(aeroport aeroportD, aeroport aeroportF);
+sf::CircleShape afficherAvion(float x, float y);
 
 #endif //SWIMMING_POOL_CLASSES_H

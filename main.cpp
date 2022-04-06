@@ -8,8 +8,9 @@ int main()
     string cour_courrier = "/Users/maxime_hrt/Documents/Ing2/Informatique/Ing2Info/TheorieDesGraphes/Swimming_pool/Images/court_courier.png";
     string moyen_courrier ="/Users/maxime_hrt/Documents/Ing2/Informatique/Ing2Info/TheorieDesGraphes/Swimming_pool/Images/moyen_courier.png";
     string long_courrier = "/Users/maxime_hrt/Documents/Ing2/Informatique/Ing2Info/TheorieDesGraphes/Swimming_pool/Images/long_courier.png";
+    string carte = "/Users/maxime_hrt/Documents/Ing2/Informatique/Ing2Info/TheorieDesGraphes/Swimming_pool/Images/Carte.png";
 
-    image(long_courrier);
+    image(carte);
     return 0;
 }
 
