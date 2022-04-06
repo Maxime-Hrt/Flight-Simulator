@@ -1,52 +1,33 @@
 #include "Classes.h"
-using namespace sf;
+
+using namespace std;
 
 
+
+/*
 int main()
 {
+    string cour_courrier = "/Users/mael/Desktop/ece/piscine/Piscine-Project/Images/court_courier.png";
+    string moyen_courrier ="/Users/mael/Desktop/ece/piscine/Piscine-Project/Images/moyen_courier.png";
+    string long_courrier = "/Users/mael/Desktop/ece/piscine/Piscine-Project/Images/long_courier.png";
+
 
     string cour_courrier = "/Users/maxime_hrt/Documents/Ing2/Informatique/Ing2Info/TheorieDesGraphes/Swimming_pool/Images/court_courier.png";
     string moyen_courrier ="/Users/maxime_hrt/Documents/Ing2/Informatique/Ing2Info/TheorieDesGraphes/Swimming_pool/Images/moyen_courier.png";
     string long_courrier = "/Users/maxime_hrt/Documents/Ing2/Informatique/Ing2Info/TheorieDesGraphes/Swimming_pool/Images/long_courier.png";
-    string carte = "/Users/maxime_hrt/Documents/Ing2/Informatique/Ing2Info/TheorieDesGraphes/Swimming_pool/Images/Carte.png";
 
-    image(carte);
+    image(long_courrier);
     return 0;
 }
 
-/*
-int main(){
-    RenderWindow window(VideoMode(WIDTH, HEIGHT), "Simulateur tour de contrôle");
-
-    Texture imageFond_texture;
-    if(imageFond_texture.loadFromFile("/Users/maxime_hrt/Documents/Ing2/Informatique/Ing2Info/TheorieDesGraphes/Swimming_pool/Images/Long_Courrier.png", IntRect(0, 0, WIDTH, HEIGHT))){
-        //Message d'erreur t'as vu
-    }
-    Sprite imageFond;
-    imageFond.setTexture(imageFond_texture);
-
-    while (window.isOpen())
-    {
-        Event event;
-
-        while (window.pollEvent(event))
-        {
-            if (event.type == Event::Closed)
-                window.close();
-        }
-
-        window.clear();
-        window.draw(imageFond);
-        window.display();
-    }
-
-    return 0;
-}
 */
 
 
-/**
+
+
 int main() {
+
+
     vector<aeroport> aero;
     std::vector<Avion> stackAvion;
     std::string TypeAvion;
@@ -96,7 +77,6 @@ int main() {
 
 
 
-/// faire un do while mais fleme je vais dodo
     do{
         std::cout<<std::endl;
         std::cout<<"=========================================Menu========================================="<<std::endl;
@@ -118,7 +98,24 @@ int main() {
                     stackAvion.push_back(AvionTest);
                 }
                 stackAvion[0].ParametrageGPSdijkstra();
-                stackAvion[0].trajet_de_lavion();
+                stackAvion[0].setTrajet(stackAvion[0].trajet_de_lavion());
+                stackAvion[0].envol();
+                vector<int> pp;
+
+                for (int i = stackAvion[0].getTrajet().size()-1; i >= 0; --i) { //inversion trajet pour plus de clareté
+                    pp.push_back(stackAvion[0].getTrajet()[i]);
+                }
+                stackAvion[0].setTrajet(pp);
+
+                for (int i = 0; i < stackAvion[0].getTrajet().size()-1; ++i) {
+                    //cout << stackAvion[0].getTrajet()[i] << " ";
+
+                    int distance = aero[stackAvion[0].getTrajet()[i]].getDistance(conversionSommetVille(stackAvion[0].getTrajet()[i])+"->"+conversionSommetVille(stackAvion[0].getTrajet()[i+1]));
+                    stackAvion[0].setnbUT(distance/200);
+                }
+
+
+
             }
                 break;
             case 2:
@@ -151,9 +148,3 @@ int main() {
 
     return 0;
 }
-<<<<<<< HEAD
-=======
-
-
->>>>>>> backup
-*/

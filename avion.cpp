@@ -97,18 +97,20 @@ int Avion::getMin(int dist[], bool visited[]) {
     return key ;
 }
 
-void Avion::display(int dist[], int par[], int end) {
-
+vector<int> Avion::display(int dist[], int par[], int end) {
+    vector<int> trajet;
     int temp = par[end];
+    trajet.push_back(end);
     cout<< conversionSommetVille(end) + " <- ";
     while(temp!=-1) {
+        trajet.push_back(temp);
         cout<< conversionSommetVille(temp) + " <- ";
         temp = par[temp];
     }
     cout<<endl;
     cout<<"Distance = " << dist[end];
     cout<<endl;
-
+    return trajet;
 }
 
 
@@ -147,7 +149,7 @@ std::string Avion::getType()
     return type;
 }
 
-void Avion::dijkstra(int src , int end) {
+vector<int> Avion::dijkstra(int src , int end) {
     int par[100], dist[100];
     bool visited[100] ={0};
     fill(dist, dist+nbs, INT_MAX );
@@ -164,10 +166,10 @@ void Avion::dijkstra(int src , int end) {
             }
         }
     }
-    display(dist, par, end);
+    return display(dist, par, end);
 }
 
-void Avion::trajet_de_lavion()
+vector<int> Avion::trajet_de_lavion()
 {
     std::cout<<"Voici les aeroport disponible pour ce type d'avion :";
     if(type == "Cours_Courrier")
@@ -191,7 +193,7 @@ void Avion::trajet_de_lavion()
     cout << "Sommet de d'arrivee\n";
     cin >> j;
     std::cout<<"BON VOL :)"<<std::endl;
-    dijkstra(i, j);
+    return dijkstra(i, j);
 }
 
 

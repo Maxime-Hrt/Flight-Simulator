@@ -9,6 +9,9 @@
 #include <ctime>
 #include <SFML/Graphics.hpp>
 #include <sstream>
+#include <thread>
+#include <chrono>
+
 
 #define WIDTH 1707
 #define HEIGHT 1067
@@ -26,26 +29,50 @@ private:
     int positionActuelle; ///la position de l'avion dit dans quel aeroport se trouve l'avion
     int cost[100][100], nbs, Sommet_, Adjacence, ponderation_;
     int DistanceAutonomie;
+    vector<int> trajet;
+    int etat_avion;  ///0 au sol ; 1 en l'air ;
+    int nbUT;
+
 public:
     Avion();
     Avion(std::string type);
     ~Avion();
     void ParametrageGPSdijkstra();
     int getMin(int dist[], bool visited[]);
-    void display(int dist[], int par[], int end);
-    void dijkstra(int src , int end);
-    void trajet_de_lavion();
+    vector<int> display(int dist[], int par[], int end);
+    vector<int> dijkstra(int src , int end);
+    vector<int> trajet_de_lavion();
     void afficheAttribut();
     std::string getType();
     void setNom(std::string nouveauNom);
+    vector<int> getTrajet(){
+        return trajet;
+    }
+    void setTrajet(vector<int> _trajet){
+        trajet=_trajet;
+    }
+    void envol(){
+        etat_avion=1;
+    }
+    void ausol(){
+        etat_avion=0;
+    }
+    void setnbUT(int _nbUT){
+        nbUT=_nbUT;
+    }
+    int getnbUT(){
+        return nbUT;
+    }
+
+
 };
 
 class aeroport{
 private:
     int num_sommet;
     string nom;
-    int loca_x;
-    int loca_y;
+    float loca_x;
+    float loca_y;
     int nb_piste;
     int nb_places_sol;
     int attente_sol;
@@ -78,6 +105,15 @@ public:
     void decoler(Avion Avion_en_Decolage);
     void actualisationDecolageToutLesAeroport();
     void InitialiseAeroport();
+    float getLoca_x(){
+        return loca_x;
+    }
+    float getLoca_y(){
+        return loca_y;
+    }
+    int getDistance(string cle){
+        return arrete[cle];
+    }
 };
 
 string conversionSommetVille(int nombre);

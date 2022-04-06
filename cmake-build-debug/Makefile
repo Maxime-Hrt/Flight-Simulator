@@ -129,6 +129,30 @@ HelloSFML/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/HelloSFML.dir/build.make CMakeFiles/HelloSFML.dir/build
 .PHONY : HelloSFML/fast
 
+Graphique.o: Graphique.cpp.o
+.PHONY : Graphique.o
+
+# target to build an object file
+Graphique.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HelloSFML.dir/build.make CMakeFiles/HelloSFML.dir/Graphique.cpp.o
+.PHONY : Graphique.cpp.o
+
+Graphique.i: Graphique.cpp.i
+.PHONY : Graphique.i
+
+# target to preprocess a source file
+Graphique.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HelloSFML.dir/build.make CMakeFiles/HelloSFML.dir/Graphique.cpp.i
+.PHONY : Graphique.cpp.i
+
+Graphique.s: Graphique.cpp.s
+.PHONY : Graphique.s
+
+# target to generate assembly for a file
+Graphique.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HelloSFML.dir/build.make CMakeFiles/HelloSFML.dir/Graphique.cpp.s
+.PHONY : Graphique.cpp.s
+
 aeroport.o: aeroport.cpp.o
 .PHONY : aeroport.o
 
@@ -234,6 +258,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... HelloSFML"
+	@echo "... Graphique.o"
+	@echo "... Graphique.i"
+	@echo "... Graphique.s"
 	@echo "... aeroport.o"
 	@echo "... aeroport.i"
 	@echo "... aeroport.s"

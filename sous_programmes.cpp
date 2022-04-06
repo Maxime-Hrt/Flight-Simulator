@@ -98,9 +98,3 @@ std::vector<aeroport> remplirAeroAleatoirement(std::vector<aeroport> ListeAeropo
 
 }
 
-
-
-
-
-
-

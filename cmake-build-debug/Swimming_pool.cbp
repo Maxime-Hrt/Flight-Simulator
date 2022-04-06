@@ -83,6 +83,9 @@
 		<Unit filename="/Users/mael/Desktop/ece/piscine/Piscine-Project/Classes.h">
 			<Option target="HelloSFML"/>
 		</Unit>
+		<Unit filename="/Users/mael/Desktop/ece/piscine/Piscine-Project/Graphique.cpp">
+			<Option target="HelloSFML"/>
+		</Unit>
 		<Unit filename="/Users/mael/Desktop/ece/piscine/Piscine-Project/aeroport.cpp">
 			<Option target="HelloSFML"/>
 		</Unit>
