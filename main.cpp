@@ -1,12 +1,15 @@
 #include "Classes.h"
 using namespace sf;
 
+//erxgx'"tgerzgxerz
+//zgefx
+
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "SFML Application");
     sf::Texture imageFond_texture;
 
-    if(imageFond_texture.loadFromFile("/Users/maxime_hrt/Documents/Ing2/Informatique/Ing2Info/TheorieDesGraphes/Swimming_pool/Images/Long_Courrier.png", IntRect(0, 0, WIDTH, HEIGHT))){
+    if(imageFond_texture.loadFromFile("/Users/mael/Desktop/ece/piscine/Piscine-Project/Images/Long_Courrier.png", IntRect(0, 0, WIDTH, HEIGHT))){
         //Message d'erreur t'as vu
     }
     Sprite imageFond;

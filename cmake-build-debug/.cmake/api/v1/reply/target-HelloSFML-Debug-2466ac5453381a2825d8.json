@@ -49,19 +49,15 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : " -std=c++11 -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11.6"
+					"fragment" : " -std=c++11 -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk"
 				}
 			],
 			"includes" : 
 			[
 				{
 					"backtrace" : 3,
-					"path" : "/usr/local/include"
-				},
-				{
-					"backtrace" : 2,
 					"isSystem" : true,
-					"path" : "/opt/homebrew/include"
+					"path" : "/usr/local/include"
 				}
 			],
 			"language" : "CXX",
@@ -88,32 +84,32 @@
 				"role" : "flags"
 			},
 			{
-				"fragment" : "-Wl,-rpath,/opt/homebrew/lib",
+				"fragment" : "-Wl,-rpath,/usr/local/lib",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "/opt/homebrew/lib/libsfml-graphics.2.5.1.dylib",
+				"fragment" : "/usr/local/lib/libsfml-graphics.2.5.1.dylib",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "/opt/homebrew/lib/libsfml-audio.2.5.1.dylib",
+				"fragment" : "/usr/local/lib/libsfml-audio.2.5.1.dylib",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "/opt/homebrew/lib/libsfml-network.2.5.1.dylib",
+				"fragment" : "/usr/local/lib/libsfml-network.2.5.1.dylib",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "/opt/homebrew/lib/libsfml-window.2.5.1.dylib",
+				"fragment" : "/usr/local/lib/libsfml-window.2.5.1.dylib",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "/opt/homebrew/lib/libsfml-system.2.5.1.dylib",
+				"fragment" : "/usr/local/lib/libsfml-system.2.5.1.dylib",
 				"role" : "libraries"
 			}
 		],
