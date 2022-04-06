@@ -7,6 +7,7 @@
 #include <vector>
 #include <map>
 #include <ctime>
+#include <SFML/Graphics.hpp>
 
 using namespace std;
 
