@@ -1,5 +1,65 @@
 #include "Classes.h"
+using namespace sf;
 
+int main()
+{
+    sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "SFML Application");
+    sf::Texture imageFond_texture;
+
+    if(imageFond_texture.loadFromFile("/Users/maxime_hrt/Documents/Ing2/Informatique/Ing2Info/TheorieDesGraphes/Swimming_pool/Images/Long_Courrier.png", IntRect(0, 0, WIDTH, HEIGHT))){
+        //Message d'erreur t'as vu
+    }
+    Sprite imageFond;
+    imageFond.setTexture(imageFond_texture);
+
+    while (window.isOpen())
+    {
+        sf::Event event;
+
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+
+        window.clear();
+        window.draw(imageFond);
+        window.display();
+    }
+}
+
+/*
+int main(){
+    RenderWindow window(VideoMode(WIDTH, HEIGHT), "Simulateur tour de contrôle");
+
+    Texture imageFond_texture;
+    if(imageFond_texture.loadFromFile("/Users/maxime_hrt/Documents/Ing2/Informatique/Ing2Info/TheorieDesGraphes/Swimming_pool/Images/Long_Courrier.png", IntRect(0, 0, WIDTH, HEIGHT))){
+        //Message d'erreur t'as vu
+    }
+    Sprite imageFond;
+    imageFond.setTexture(imageFond_texture);
+
+    while (window.isOpen())
+    {
+        Event event;
+
+        while (window.pollEvent(event))
+        {
+            if (event.type == Event::Closed)
+                window.close();
+        }
+
+        window.clear();
+        window.draw(imageFond);
+        window.display();
+    }
+
+    return 0;
+}
+*/
+
+
+/**
 int main() {
     vector<aeroport> aero;
     std::vector<Avion> stackAvion;
@@ -97,10 +157,9 @@ int main() {
             }
 
                 break;
-
-
         }
     }while(choixmenu != 4);
 
     return 0;
 }
+*/
