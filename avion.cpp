@@ -1,7 +1,10 @@
 #include "Classes.h"
 
+
+
 void Avion::afficheAttribut()
 {
+    std::cout<<"Le NOM de cet avion est : "<<nomAvion<<std::endl;
     std::cout<<"Le type de cet avion est : "<<type<<std::endl;
     std::cout<<"La consomation au 100 Km de cet avion est : "<<consomation<<std::endl;
     std::cout<<"Le reservoir de cet avion est de : "<<reservoir<<std::endl;
@@ -76,6 +79,11 @@ Avion::Avion(std::string _type):type(_type)
     }
 }
 
+void Avion::setNom(std::string nouveauNom)
+{
+    nomAvion = nouveauNom;
+}
+
 
 int Avion::getMin(int dist[], bool visited[]) {
     int key = 0;
@@ -134,6 +142,11 @@ void Avion::ParametrageGPSdijkstra()
 }
 
 
+std::string Avion::getType()
+{
+    return type;
+}
+
 void Avion::dijkstra(int src , int end) {
     int par[100], dist[100];
     bool visited[100] ={0};
@@ -160,6 +173,8 @@ void Avion::trajet_de_lavion()
     if(type == "Cours_Courrier")
     {
         /// afficher les trajet possible sur allegro et blinder les entré en dessous pour le choix des sommmet depart et arrivé
+
+
     }
     else if(type == "Moyen_Courrier")
     {
@@ -181,4 +196,3 @@ void Avion::trajet_de_lavion()
 
 
 Avion::~Avion() {}
-

@@ -1,34 +1,18 @@
 #include "Classes.h"
 using namespace sf;
 
-/*
+
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "SFML Application");
-    sf::Texture imageFond_texture;
 
-    if(imageFond_texture.loadFromFile("/Users/maxime_hrt/Documents/Ing2/Informatique/Ing2Info/TheorieDesGraphes/Swimming_pool/Images/Long_Courrier.png", IntRect(0, 0, WIDTH, HEIGHT))){
-        //Message d'erreur t'as vu
-    }
-    Sprite imageFond;
-    imageFond.setTexture(imageFond_texture);
+    string cour_courrier = "/Users/maxime_hrt/Documents/Ing2/Informatique/Ing2Info/TheorieDesGraphes/Swimming_pool/Images/court_courier.png";
+    string moyen_courrier ="/Users/maxime_hrt/Documents/Ing2/Informatique/Ing2Info/TheorieDesGraphes/Swimming_pool/Images/moyen_courier.png";
+    string long_courrier = "/Users/maxime_hrt/Documents/Ing2/Informatique/Ing2Info/TheorieDesGraphes/Swimming_pool/Images/long_courier.png";
 
-    while (window.isOpen())
-    {
-        sf::Event event;
-
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
-
-        window.clear();
-        window.draw(imageFond);
-        window.display();
-    }
+    image(long_courrier);
+    return 0;
 }
-*/
+
 /*
 int main(){
     RenderWindow window(VideoMode(WIDTH, HEIGHT), "Simulateur tour de contrôle");
@@ -60,7 +44,7 @@ int main(){
 */
 
 
-
+/**
 int main() {
     vector<aeroport> aero;
     std::vector<Avion> stackAvion;
@@ -99,9 +83,10 @@ int main() {
         cout << "ERREUR: Impossible d'ouvrir le fichier." << endl;
     }
 
-    aero = remplirAeroAleatoirement(aero);
+    //aero = remplirAeroAleatoirement(aero);
     for(int z=0;z<aero.size();z++)
     {
+        aero[z].InitialiseAeroport();
         std::cout<<"==========================================="<<std::endl;
         std::cout<<"Aeroport "<<z<<std::endl;
         std::cout<<"===========================================";
@@ -158,8 +143,16 @@ int main() {
             }
 
                 break;
+
+
         }
     }while(choixmenu != 4);
 
     return 0;
 }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> backup
+*/
