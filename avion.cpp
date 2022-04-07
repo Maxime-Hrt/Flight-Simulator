@@ -1,6 +1,6 @@
 #include "Classes.h"
 
-
+//cc
 
 void Avion::afficheAttribut()
 {
@@ -11,8 +11,20 @@ void Avion::afficheAttribut()
     std::cout<<"La distance que cet avion peut parcourir en autonomie est : "<<DistanceAutonomie<<std::endl;
 }
 
+std::string Avion::getNom()
+{
+    return nomAvion;
+}
+
+
 Avion::Avion(std::string _type):type(_type)
 {
+    EtatAvion["Sol"] = 0;
+    EtatAvion["Vol"] = 0;
+    EtatAvion["Atterit"] = 0;
+    EtatAvion["Decole"] = 0;
+    EtatAvion["Attend"] = 0;
+    EtatAvion["AccedePiste"] = 0;
     if(_type == "Cours_Courrier")
     {
         ifstream fichier("Avion.txt");
@@ -27,6 +39,7 @@ Avion::Avion(std::string _type):type(_type)
         else {
             cout << "ERREUR: Impossible d'ouvrir le fichier." << endl;
         }
+
     }
     else if(_type == "Moyen_Courrier")
     {
@@ -141,6 +154,7 @@ void Avion::ParametrageGPSdijkstra()
     else {
         std::cout << "ERREUR: Impossible d'ouvrir le fichier." << std::endl;
     }
+
 }
 
 
@@ -169,32 +183,325 @@ vector<int> Avion::dijkstra(int src , int end) {
     return display(dist, par, end);
 }
 
-vector<int> Avion::trajet_de_lavion()
+/// modification methode
+vector<int> Avion::trajet_de_lavion(int depart,int arrive)
 {
-    std::cout<<"Voici les aeroport disponible pour ce type d'avion :";
+
+
     if(type == "Cours_Courrier")
     {
-        /// afficher les trajet possible sur allegro et blinder les entré en dessous pour le choix des sommmet depart et arrivé
+        int inutile;
+        int verifarriveexiste;
+        int verifdepartexiste;
+        bool verifarriveexiste1 = false;
+        bool verifdepartexiste1 = false;
+        bool Trajet_existe = false;
+        std::ifstream fichier("Cours_Courrier.txt");
+        /// lecture du fichier ( structure du fichier est celui donné dans le tp )///
+        if(fichier) {
+            fichier>>inutile;
+            while(fichier>>verifdepartexiste) {
+                fichier>>verifarriveexiste;
+                fichier>>inutile;
+                if(verifdepartexiste == depart)
+                {
+                    verifdepartexiste1 = true;
+                }
+                if(verifarriveexiste == arrive)
+                {
+                    verifarriveexiste1 = true;
+                }
+            }
+        }
+        else {
+            std::cout << "ERREUR: Impossible d'ouvrir le fichier." << std::endl;
+        }
+        if((verifdepartexiste1 == true)&&(verifarriveexiste1 == true))
+        {
+            Trajet_existe = true;
+        }
+        if( Trajet_existe == true)
+        {
+            PeutFaireVoyage = true;
+            return dijkstra(depart, arrive);
+        }
+        else
+        {
+            PeutFaireVoyage = false;
+            std::cout<<"Cet avion ne peut pas effectuer ce trajet desole"<<std::endl;
+        }
 
+        /// afficher les trajet possible sur allegro et blinder les entré en dessous pour le choix des sommmet depart et arrivé
 
     }
     else if(type == "Moyen_Courrier")
     {
+
+        int inutile;
+        int verifarriveexiste;
+        int verifdepartexiste;
+        bool verifarriveexiste1 = false;
+        bool verifdepartexiste1 = false;
+        bool Trajet_existe = false;
+        std::ifstream fichier("Moyen_Courrier.txt");
+        /// lecture du fichier ( structure du fichier est celui donné dans le tp )///
+        if(fichier) {
+            fichier>>inutile;
+            while(fichier>>verifdepartexiste) {
+                fichier>>verifarriveexiste;
+                fichier>>inutile;
+                if(verifdepartexiste == depart)
+                {
+                    verifdepartexiste1 = true;
+                }
+                if(verifarriveexiste == arrive)
+                {
+                    verifarriveexiste1 = true;
+                }
+            }
+        }
+        else {
+            std::cout << "ERREUR: Impossible d'ouvrir le fichier." << std::endl;
+        }
+        if((verifdepartexiste1 == true)&&(verifarriveexiste1 == true))
+        {
+            Trajet_existe = true;
+        }
+        if( Trajet_existe == true)
+        {
+            PeutFaireVoyage = true;
+            return dijkstra(depart, arrive);
+        }
+        else
+        {
+            PeutFaireVoyage = false;
+            std::cout<<"Cet avion ne peut pas effectuer ce trajet desole"<<std::endl;
+        }
         /// afficher les trajet possible sur allegro et blinder les entré en dessous pour le choix des sommmet depart et arrivé
     }
     else if(type == "Long_Courrier")
     {
+
+        int inutile;
+        int verifarriveexiste;
+        int verifdepartexiste;
+        bool verifarriveexiste1 = false;
+        bool verifdepartexiste1 = false;
+        bool Trajet_existe = false;
+        std::ifstream fichier("Long_Courrier.txt");
+        /// lecture du fichier ( structure du fichier est celui donné dans le tp )///
+        if(fichier) {
+            fichier>>inutile;
+            while(fichier>>verifdepartexiste) {
+                fichier>>verifarriveexiste;
+                fichier>>inutile;
+                if(verifdepartexiste == depart)
+                {
+                    verifdepartexiste1 = true;
+                }
+                if(verifarriveexiste == arrive)
+                {
+                    verifarriveexiste1 = true;
+                }
+            }
+        }
+        else {
+            std::cout << "ERREUR: Impossible d'ouvrir le fichier." << std::endl;
+        }
+        if((verifdepartexiste1 == true)&&(verifarriveexiste1 == true))
+        {
+            Trajet_existe = true;
+        }
+        if( Trajet_existe == true)
+        {
+            PeutFaireVoyage = true;
+            return dijkstra(depart, arrive);
+        }
+        else
+        {
+            PeutFaireVoyage = false;
+            std::cout<<"Cet avion ne peut pas effectuer ce trajet desole"<<std::endl;
+        }
         /// afficher les trajet possible sur allegro et blinder les entré en dessous pour le choix des sommmet depart et arrivé
     }
-    int i, j;
-    std::cout<<std::endl;
-    cout << "Sommet de depart\n";                       /// A therme on remplacera i par l'aeroport ou l'avion est arreté
-    cin >> i;
-    cout << "Sommet de d'arrivee\n";
-    cin >> j;
-    std::cout<<"BON VOL :)"<<std::endl;
-    return dijkstra(i, j);
+
 }
+
+
+/*
+bool Avion::trajet_de_lavion(int depart,int arrive)
+{
+    std::cout<<"Voici les aeroport disponible pour ce type d'avion :";
+    if(type == "Cours_Courrier")
+    {
+        int inutile;
+        int verifarriveexiste;
+        int verifdepartexiste;
+        bool verifarriveexiste1 = false;
+        bool verifdepartexiste1 = false;
+        bool Trajet_existe = false;
+        std::ifstream fichier("Cours_Courrier.txt");
+        /// lecture du fichier ( structure du fichier est celui donné dans le tp )///
+        if(fichier) {
+            fichier>>inutile;
+            while(fichier>>verifdepartexiste) {
+                fichier>>verifarriveexiste;
+                fichier>>inutile;
+                if(verifdepartexiste == depart)
+                {
+                    verifdepartexiste1 = true;
+                }
+                if(verifarriveexiste == arrive)
+                {
+                    verifarriveexiste1 = true;
+                }
+            }
+        }
+        else {
+            std::cout << "ERREUR: Impossible d'ouvrir le fichier." << std::endl;
+        }
+        if((verifdepartexiste1 == true)&&(verifarriveexiste1 == true))
+        {
+            Trajet_existe = true;
+        }
+        if( Trajet_existe == true)
+        {
+            dijkstra(depart, arrive);
+            return true;
+        }
+        else
+        {
+            std::cout<<"Cet avion ne peut pas effectuer ce trajet desole"<<std::endl;
+            return false;
+        }
+
+        /// afficher les trajet possible sur allegro et blinder les entré en dessous pour le choix des sommmet depart et arrivé
+
+    }
+    else if(type == "Moyen_Courrier")
+    {
+
+        int inutile;
+        int verifarriveexiste;
+        int verifdepartexiste;
+        bool verifarriveexiste1 = false;
+        bool verifdepartexiste1 = false;
+        bool Trajet_existe = false;
+        std::ifstream fichier("Moyen_Courrier.txt");
+        /// lecture du fichier ( structure du fichier est celui donné dans le tp )///
+        if(fichier) {
+            fichier>>inutile;
+            while(fichier>>verifdepartexiste) {
+                fichier>>verifarriveexiste;
+                fichier>>inutile;
+                if(verifdepartexiste == depart)
+                {
+                    verifdepartexiste1 = true;
+                }
+                if(verifarriveexiste == arrive)
+                {
+                    verifarriveexiste1 = true;
+                }
+            }
+        }
+        else {
+            std::cout << "ERREUR: Impossible d'ouvrir le fichier." << std::endl;
+        }
+        if((verifdepartexiste1 == true)&&(verifarriveexiste1 == true))
+        {
+            Trajet_existe = true;
+        }
+        if( Trajet_existe == true)
+        {
+            dijkstra(depart, arrive);
+            return true;
+        }
+        else
+        {
+            std::cout<<"Cet avion ne peut pas effectuer ce trajet desole"<<std::endl;
+            return false;
+        }
+        /// afficher les trajet possible sur allegro et blinder les entré en dessous pour le choix des sommmet depart et arrivé
+    }
+    else if(type == "Long_Courrier")
+    {
+
+        int inutile;
+        int verifarriveexiste;
+        int verifdepartexiste;
+        bool verifarriveexiste1 = false;
+        bool verifdepartexiste1 = false;
+        bool Trajet_existe = false;
+        std::ifstream fichier("Long_Courrier.txt");
+        /// lecture du fichier ( structure du fichier est celui donné dans le tp )///
+        if(fichier) {
+            fichier>>inutile;
+            while(fichier>>verifdepartexiste) {
+                fichier>>verifarriveexiste;
+                fichier>>inutile;
+                if(verifdepartexiste == depart)
+                {
+                    verifdepartexiste1 = true;
+                }
+                if(verifarriveexiste == arrive)
+                {
+                    verifarriveexiste1 = true;
+                }
+            }
+        }
+        else {
+            std::cout << "ERREUR: Impossible d'ouvrir le fichier." << std::endl;
+        }
+        if((verifdepartexiste1 == true)&&(verifarriveexiste1 == true))
+        {
+            Trajet_existe = true;
+        }
+        if( Trajet_existe == true)
+        {
+            dijkstra(depart, arrive);
+            return true;
+        }
+        else
+        {
+            std::cout<<"Cet avion ne peut pas effectuer ce trajet desole"<<std::endl;
+            return false;
+        }
+        /// afficher les trajet possible sur allegro et blinder les entré en dessous pour le choix des sommmet depart et arrivé
+    }
+
+}*/
+
+
+
+
+
+
+
+
+
+void Avion::setEtatAvion(map<string,int> MAJEtatAvion)
+{
+    EtatAvion = MAJEtatAvion;
+}
+map<string,int> Avion::getEtatAvion()
+{
+    return EtatAvion;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 Avion::~Avion() {}

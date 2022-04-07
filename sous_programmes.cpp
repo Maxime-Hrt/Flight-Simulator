@@ -1,4 +1,5 @@
 #include "Classes.h"
+//cc
 
 string conversionSommetVille(int nombre){
     switch (nombre) {
@@ -63,38 +64,3 @@ std::string choixavion()
     }
     return TypeAvionChoix;
 }
-
-
-std::vector<aeroport> remplirAeroAleatoirement(std::vector<aeroport> ListeAeroport)
-{
-    for(int i= 0;i<ListeAeroport.size();i++)
-    {
-        int nbAvionInitial;
-        nbAvionInitial = ListeAeroport[i].getternb_places_sol();
-        srand((unsigned int)time(0));
-        int nbAvionDansAreo = rand()%nbAvionInitial +1;
-        for(int x=0;x<nbAvionDansAreo;x++)
-        {
-            int TypeAvion = rand()%3 +1;
-
-            if(TypeAvion == 1)
-            {
-                Avion AvionInitialisation("Cours_Courrier");
-                ListeAeroport[i].remplirAvionParking(AvionInitialisation);
-            }
-            else if(TypeAvion == 2)
-            {
-                Avion AvionInitialisation("Moyen_Courrier");
-                ListeAeroport[i].remplirAvionParking(AvionInitialisation);
-            }
-            else if(TypeAvion == 3)
-            {
-                Avion AvionInitialisation("Long_Courrier");
-                ListeAeroport[i].remplirAvionParking(AvionInitialisation);
-            }
-        }
-    }
-    return ListeAeroport;
-
-}
-
