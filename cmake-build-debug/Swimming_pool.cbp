@@ -80,6 +80,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/mael/Desktop/ece/piscine/Piscine-Project/Carte.cpp">
+			<Option target="HelloSFML"/>
+		</Unit>
 		<Unit filename="/Users/mael/Desktop/ece/piscine/Piscine-Project/Classes.h">
 			<Option target="HelloSFML"/>
 		</Unit>

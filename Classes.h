@@ -1,31 +1,41 @@
 #ifndef SWIMMING_POOL_CLASSES_H
 #define SWIMMING_POOL_CLASSES_H
 
+
+
+
+#include <stdio.h>
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <vector>
 #include <map>
 #include <ctime>
-#include <SFML/Graphics.hpp>
 #include <sstream>
 #include <thread>
 #include <chrono>
-
-
+#include <SFML/Graphics.hpp>
 #define WIDTH 1707
 #define HEIGHT 1067
-
-
 using namespace std;
+
+///nouveau
+
+
 
 class Avion
 {
 private:
+    /// nouveau
+    map<string,int> EtatAvion; // Vol,Sol,Atterit,Decole,Attend,AccedePiste
+    vector<Avion> AvionEnVOl;
+    vector<Avion> AvionEnAttente;
+    ///===============
     std::string type;
     std::string nomAvion;
     int consomation;
     int reservoir;
+    //int positionActuelle; ///la position de l'avion dit dans quel aeroport se trouve l'avion
     float loca_x, loca_y;
     int cost[100][100], nbs, Sommet_, Adjacence, ponderation_;
     int DistanceAutonomie;
@@ -33,8 +43,7 @@ private:
     int etat_avion;  ///0 au sol ; 1 en l'air ;
     vector<float> nbUT;
     vector<float> avencement_x, avencement_y;
-
-
+    bool PeutFaireVoyage;
 public:
     Avion();
     Avion(std::string type);
@@ -43,10 +52,22 @@ public:
     int getMin(int dist[], bool visited[]);
     vector<int> display(int dist[], int par[], int end);
     vector<int> dijkstra(int src , int end);
-    vector<int> trajet_de_lavion();
+    vector<int> trajet_de_lavion(int depart,int arrive);
     void afficheAttribut();
     std::string getType();
     void setNom(std::string nouveauNom);
+    ///nouveau aussi
+    std::string getNom();
+    void setEtatAvion(map<string,int> MAJEtatAvion);
+    map<string,int> getEtatAvion();
+    void ActualisationCompteurUTVOL();
+    void ActualisationCompteurUTATTENTE();
+
+    bool getPeutFaireVoyage()
+    {
+        return PeutFaireVoyage;
+    }
+
     vector<int> getTrajet(){
         return trajet;
     }
@@ -70,6 +91,7 @@ public:
         loca_y += avencement_y[i];
     }
     void setAvencement(float x, float y){
+
         avencement_y.push_back(y);
         avencement_x.push_back(x);
     }
@@ -81,13 +103,17 @@ public:
     }
 
 };
+///nouveau
+
+
+
 
 class aeroport{
 private:
     int num_sommet;
     string nom;
-    float loca_x;
-    float loca_y;
+    int loca_x;
+    int loca_y;
     int nb_piste;
     int nb_places_sol;
     int attente_sol;
@@ -104,6 +130,7 @@ private:
     std::vector<Avion> decolageEnCours; /// les avions reste dans ce vecteur un certains temps avant de decoller completement de l'aeroport
     std::vector<Avion> File_Atteente_Atterissage;/// ici stocker les avion en attente pour atterir par ordre d'urgence(manque d'essence etc)
     std::vector<Avion> File_Atteente_Decolage;
+    std::vector<Avion> Accede_au_piste;
 
 public:
     aeroport();
@@ -120,6 +147,12 @@ public:
     void decoler(Avion Avion_en_Decolage);
     void actualisationDecolageToutLesAeroport();
     void InitialiseAeroport();
+    std::vector<Avion> partir(int depart,int arrive);
+    ///nouveau
+    void ActualisationCompteurUTATTERISSAGE();
+    void ActualisationCompteurUTSOL();
+    void ActualisationCompteurUTDECOLAGE();
+    void icitoutcepasse();
     float getLoca_x(){
         return loca_x;
     }
@@ -131,12 +164,25 @@ public:
     }
 };
 
+
+class Carte{
+private:
+    std::vector<aeroport> ToutLesAeroport;
+    std::vector<Avion> AvionEnVol;
+public:
+    void IciToutCePasse();
+    void initialiseAeroport();
+    void derouledujeu();
+};
+
+
+
 string conversionSommetVille(int nombre);
 std::string choixavion();
 std::vector<aeroport> remplirAeroAleatoirement(std::vector<aeroport> ListeAeroport);
 void image(string image_path);
 void drawSprite(sf::Sprite image);
-void coordoTrajet(aeroport aeroportD, aeroport aeroportF);
 sf::CircleShape afficherAvion(float x, float y);
+
 
 #endif //SWIMMING_POOL_CLASSES_H

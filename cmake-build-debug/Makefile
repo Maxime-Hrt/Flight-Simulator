@@ -129,6 +129,30 @@ HelloSFML/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/HelloSFML.dir/build.make CMakeFiles/HelloSFML.dir/build
 .PHONY : HelloSFML/fast
 
+Carte.o: Carte.cpp.o
+.PHONY : Carte.o
+
+# target to build an object file
+Carte.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HelloSFML.dir/build.make CMakeFiles/HelloSFML.dir/Carte.cpp.o
+.PHONY : Carte.cpp.o
+
+Carte.i: Carte.cpp.i
+.PHONY : Carte.i
+
+# target to preprocess a source file
+Carte.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HelloSFML.dir/build.make CMakeFiles/HelloSFML.dir/Carte.cpp.i
+.PHONY : Carte.cpp.i
+
+Carte.s: Carte.cpp.s
+.PHONY : Carte.s
+
+# target to generate assembly for a file
+Carte.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HelloSFML.dir/build.make CMakeFiles/HelloSFML.dir/Carte.cpp.s
+.PHONY : Carte.cpp.s
+
 Graphique.o: Graphique.cpp.o
 .PHONY : Graphique.o
 
@@ -258,6 +282,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... HelloSFML"
+	@echo "... Carte.o"
+	@echo "... Carte.i"
+	@echo "... Carte.s"
 	@echo "... Graphique.o"
 	@echo "... Graphique.i"
 	@echo "... Graphique.s"
