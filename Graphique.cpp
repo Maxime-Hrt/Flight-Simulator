@@ -1,5 +1,6 @@
 #include "Classes.h"
 
+//cc
 sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "SFML Application");
 
 
