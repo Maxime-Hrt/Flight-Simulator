@@ -141,7 +141,7 @@ void Carte::derouledujeu()
                 std::cout << " entrer 6 pour Dubai" << std::endl;
                 std::cout << " entrer 7 pour Santiago" << std::endl;
                 std::cin >> arrive;
-                /*stackAvionDispo = ToutLesAeroport[depart].partir(depart, arrive);
+                stackAvionDispo = ToutLesAeroport[depart].partir(depart, arrive);
                 std::cout
                         << "entrer le nom de l'avion que voulez faire decoler (ce nom doit apparaitre dans la liste des avion disponible)"
                         << std::endl;
@@ -159,7 +159,7 @@ void Carte::derouledujeu()
                 std::cout << "ENTRER 1 POUR ARRETER LA SIMULATION" << std::endl;
                 std::cout << "ENTRER 0 POUR CONTINUER LA SIMULATION" << std::endl;
                 std::cin >> FIN;
-                }*/
+                }
 
                 stackAvion111.push_back(AvionTest);
                 stackAvion111[0].ParametrageGPSdijkstra();
