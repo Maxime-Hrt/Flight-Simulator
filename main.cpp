@@ -27,6 +27,16 @@ int main()
 
 int main() {
 
+    /*************************************************** INITIALISATION DES GRAPHIQUES **********************************************************/
+    sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "SFML Application");
+    sf::Texture imageFond_texture;
+    if(imageFond_texture.loadFromFile("/Users/maxime_hrt/Documents/Ing2/Informatique/Ing2Info/TheorieDesGraphes/Swimming_pool/Images/Carte.png", sf::IntRect(0, 0, WIDTH, HEIGHT))){
+        //Message d'erreur t'as vu
+    }
+    sf::Sprite imageFond;
+    imageFond.setTexture(imageFond_texture);
+
+    /*******************************************************************************************************************************************/
 
     vector<aeroport> aero;
     std::vector<Avion> stackAvion;
@@ -76,80 +86,108 @@ int main() {
     }
 
 
+    window.clear();
 
-    do{
-        std::cout<<std::endl;
-        std::cout<<"=========================================Menu========================================="<<std::endl;
-        std::cout<<"Si vous voulez vous deplacer appuyer sur 1"<<std::endl;
-        std::cout<<"Si vous voulez choisir votre avion appuyer sur 2"<<std::endl;
-        std::cout<<"Si vous voulez afficher les caracteristique de votre avion appuyer sur 3"<<std::endl;
-        std::cout<<"quitter appuyer sur 4"<<std::endl;
-        std::cout<<"======================================================================================"<<std::endl;
-        std::cin>>choixmenu;
+    while (window.isOpen()) {
+        sf::Event event;
 
-        switch(choixmenu)
-        {
-            case 1:
-            {
-                if(stackAvion.size() == 0)
-                {
-                    std::cout<<"vous n'avez pas choisi d'avion avant de vous deplacer on vous a donc attribuer un avion cours courrier par default"<<std::endl;
-                    Avion AvionTest("Cours_Courrier");
-                    stackAvion.push_back(AvionTest);
+        do {
+            while (window.pollEvent(event)) {
+
+
+                std::cout << std::endl;
+                std::cout << "=========================================Menu========================================="
+                          << std::endl;
+                std::cout << "Si vous voulez vous deplacer appuyer sur 1" << std::endl;
+                std::cout << "Si vous voulez choisir votre avion appuyer sur 2" << std::endl;
+                std::cout << "Si vous voulez afficher les caracteristique de votre avion appuyer sur 3" << std::endl;
+                std::cout << "quitter appuyer sur 4" << std::endl;
+                std::cout << "======================================================================================"
+                          << std::endl;
+                std::cin >> choixmenu;
+
+                switch (choixmenu) {
+                    case 1: {
+                        if (stackAvion.size() == 0) {
+                            std::cout
+                                    << "vous n'avez pas choisi d'avion avant de vous deplacer on vous a donc attribuer un avion cours courrier par default"
+                                    << std::endl;
+                            Avion AvionTest("Cours_Courrier");
+                            stackAvion.push_back(AvionTest);
+                        }
+                        stackAvion[0].ParametrageGPSdijkstra();
+                        stackAvion[0].setTrajet(stackAvion[0].trajet_de_lavion());
+                        stackAvion[0].envol();
+                        vector<int> pp;
+
+                        for (int i = stackAvion[0].getTrajet().size() - 1;
+                             i >= 0; --i) { //inversion trajet pour plus de clareté
+                            pp.push_back(stackAvion[0].getTrajet()[i]);
+                        }
+                        stackAvion[0].setTrajet(pp);
+
+
+                        for (int i = 0; i < stackAvion[0].getTrajet().size() - 1; ++i) {
+                            //cout << stackAvion[0].getTrajet()[i] << " ";
+                            stackAvion[0].setnbUT(aero[stackAvion[0].getTrajet()[i]].getDistance(
+                                    conversionSommetVille(stackAvion[0].getTrajet()[i]) + "->" +
+                                    conversionSommetVille(stackAvion[0].getTrajet()[i + 1])) / 200);
+                            cout << stackAvion[0].getnbUT()[i] << endl;
+                            float distance = aero[stackAvion[0].getTrajet()[i]].getDistance(
+                                    conversionSommetVille(stackAvion[0].getTrajet()[i]) + "->" +
+                                    conversionSommetVille(stackAvion[0].getTrajet()[i + 1]));
+
+                            stackAvion[0].setAvencement((aero[stackAvion[0].getTrajet()[i + 1]].getLoca_x() -
+                                                         aero[stackAvion[0].getTrajet()[i]].getLoca_x()) /
+                                                        (distance / 200),
+                                                        (aero[stackAvion[0].getTrajet()[i + 1]].getLoca_y() -
+                                                         aero[stackAvion[0].getTrajet()[i]].getLoca_y()) /
+                                                        (distance / 200));
+                            cout << stackAvion[0].getAvnecement_x()[i] << " " << stackAvion[0].getAvnecement_y()[i]
+                                 << endl;
+
+                        }
+
+
+                    }
+                        break;
+                    case 2: {
+                        stackAvion.clear();
+                        TypeAvion = choixavion();
+                        Avion AvionTest1(TypeAvion);
+                        stackAvion.push_back(AvionTest1);
+                        std::cout << "Tres bon choix" << std::endl;
+                    }
+
+                        break;
+                    case 3: {
+                        if (stackAvion.size() == 0) {
+                            std::cout
+                                    << "vous n'avez pas choisi d'avion on ne peut donc pas afficher ces caracteristique"
+                                    << std::endl;
+                        } else {
+                            stackAvion[0].afficheAttribut();
+                        }
+                    }
+
+                        break;
                 }
-                stackAvion[0].ParametrageGPSdijkstra();
-                stackAvion[0].setTrajet(stackAvion[0].trajet_de_lavion());
-                stackAvion[0].envol();
-                vector<int> pp;
-
-                for (int i = stackAvion[0].getTrajet().size()-1; i >= 0; --i) { //inversion trajet pour plus de clareté
-                    pp.push_back(stackAvion[0].getTrajet()[i]);
-                }
-                stackAvion[0].setTrajet(pp);
-
-
-                for (int i = 0; i < stackAvion[0].getTrajet().size()-1; ++i) {
-                    //cout << stackAvion[0].getTrajet()[i] << " ";
-                    stackAvion[0].setnbUT(aero[stackAvion[0].getTrajet()[i]].getDistance(conversionSommetVille(stackAvion[0].getTrajet()[i])+"->"+conversionSommetVille(stackAvion[0].getTrajet()[i+1]))/200);
-                    cout << stackAvion[0].getnbUT()[i] << endl;
-                    float distance = aero[stackAvion[0].getTrajet()[i]].getDistance(conversionSommetVille(stackAvion[0].getTrajet()[i])+"->"+conversionSommetVille(stackAvion[0].getTrajet()[i+1]));
-
-                    stackAvion[0].setAvencement((aero[stackAvion[0].getTrajet()[i+1]].getLoca_x()-aero[stackAvion[0].getTrajet()[i]].getLoca_x())/(distance/200), (aero[stackAvion[0].getTrajet()[i+1]].getLoca_y()-aero[stackAvion[0].getTrajet()[i]].getLoca_y())/(distance/200));
-                    cout << stackAvion[0].getAvnecement_x()[i] << " " << stackAvion[0].getAvnecement_y()[i] << endl;
-
-                }
-
-
+                window.clear();
+                window.draw(imageFond);
 
             }
-                break;
-            case 2:
-            {
-                stackAvion.clear();
-                TypeAvion = choixavion();
-                Avion AvionTest1(TypeAvion);
-                stackAvion.push_back(AvionTest1);
-                std::cout<<"Tres bon choix"<<std::endl;
-            }
 
-                break;
-            case 3:
-            {
-                if(stackAvion.size() == 0)
-                {
-                    std::cout<<"vous n'avez pas choisi d'avion on ne peut donc pas afficher ces caracteristique"<<std::endl;
-                }
-                else
-                {
-                    stackAvion[0].afficheAttribut();
-                }
-            }
+            window.display();
 
-                break;
+            ///Timer en secondes:
+            std::chrono::seconds dura( 1);
+            std::this_thread::sleep_for( dura );
 
 
-        }
-    }while(choixmenu != 4);
 
+
+        } while (choixmenu != 4);
+
+    }
     return 0;
 }

@@ -7,11 +7,10 @@ void image(string image_path){
     sf::Texture imageFond_texture;
 
     if(imageFond_texture.loadFromFile(image_path, sf::IntRect(0, 0, WIDTH, HEIGHT))){
-        //Message d'erreur t'as vu
+        cout << "ERRRRRRRRRROOOOORRR" << endl;
     }
     sf::Sprite imageFond;
     imageFond.setTexture(imageFond_texture);
-    drawSprite(imageFond);
 
 }
 
