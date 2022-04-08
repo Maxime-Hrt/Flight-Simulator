@@ -222,12 +222,10 @@ vector<int> Avion::trajet_de_lavion(int depart,int arrive)
         }
         if( Trajet_existe == true)
         {
-            PeutFaireVoyage = true;
             return dijkstra(depart, arrive);
         }
         else
         {
-            PeutFaireVoyage = false;
             std::cout<<"Cet avion ne peut pas effectuer ce trajet desole"<<std::endl;
         }
 
@@ -269,12 +267,10 @@ vector<int> Avion::trajet_de_lavion(int depart,int arrive)
         }
         if( Trajet_existe == true)
         {
-            PeutFaireVoyage = true;
             return dijkstra(depart, arrive);
         }
         else
         {
-            PeutFaireVoyage = false;
             std::cout<<"Cet avion ne peut pas effectuer ce trajet desole"<<std::endl;
         }
         /// afficher les trajet possible sur allegro et blinder les entré en dessous pour le choix des sommmet depart et arrivé
@@ -314,12 +310,10 @@ vector<int> Avion::trajet_de_lavion(int depart,int arrive)
         }
         if( Trajet_existe == true)
         {
-            PeutFaireVoyage = true;
             return dijkstra(depart, arrive);
         }
         else
         {
-            PeutFaireVoyage = false;
             std::cout<<"Cet avion ne peut pas effectuer ce trajet desole"<<std::endl;
         }
         /// afficher les trajet possible sur allegro et blinder les entré en dessous pour le choix des sommmet depart et arrivé
@@ -327,11 +321,9 @@ vector<int> Avion::trajet_de_lavion(int depart,int arrive)
 
 }
 
-
-/*
-bool Avion::trajet_de_lavion(int depart,int arrive)
+bool Avion::Verifietrajet_de_lavion(int depart,int arrive)
 {
-    std::cout<<"Voici les aeroport disponible pour ce type d'avion :";
+
     if(type == "Cours_Courrier")
     {
         int inutile;
@@ -366,7 +358,7 @@ bool Avion::trajet_de_lavion(int depart,int arrive)
         }
         if( Trajet_existe == true)
         {
-            dijkstra(depart, arrive);
+            std::cout<<"Cet avion peut effectuer ce trajet"<<std::endl;
             return true;
         }
         else
@@ -413,7 +405,7 @@ bool Avion::trajet_de_lavion(int depart,int arrive)
         }
         if( Trajet_existe == true)
         {
-            dijkstra(depart, arrive);
+            std::cout<<"Cet avion peut effectuer ce trajet"<<std::endl;
             return true;
         }
         else
@@ -454,11 +446,11 @@ bool Avion::trajet_de_lavion(int depart,int arrive)
         }
         if((verifdepartexiste1 == true)&&(verifarriveexiste1 == true))
         {
+            std::cout<<"Cet avion peut effectuer ce trajet"<<std::endl;
             Trajet_existe = true;
         }
         if( Trajet_existe == true)
         {
-            dijkstra(depart, arrive);
             return true;
         }
         else
@@ -469,12 +461,7 @@ bool Avion::trajet_de_lavion(int depart,int arrive)
         /// afficher les trajet possible sur allegro et blinder les entré en dessous pour le choix des sommmet depart et arrivé
     }
 
-}*/
-
-
-
-
-
+}
 
 
 
