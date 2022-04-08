@@ -1,7 +1,5 @@
 #include "Classes.h"
-
-sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "SFML Application");
-
+/*
 
 void image(string image_path){
     sf::Texture imageFond_texture;
@@ -42,3 +40,4 @@ sf::CircleShape afficherAvion(float x, float y){
     avion.setPosition(x, y);
     return avion;
 }
+ */

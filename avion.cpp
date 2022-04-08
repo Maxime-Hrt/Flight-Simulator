@@ -1,6 +1,6 @@
 #include "Classes.h"
 
-//cc
+
 
 void Avion::afficheAttribut()
 {
@@ -25,6 +25,15 @@ Avion::Avion(std::string _type):type(_type)
     EtatAvion["Decole"] = 0;
     EtatAvion["Attend"] = 0;
     EtatAvion["AccedePiste"] = 0;
+    TrajetDeCetteAvionEnregistre = false;
+
+
+    ///Initialisation graphique
+    srand(time(NULL));
+    sf::CircleShape shape(10.f);
+    design = shape;
+    design.setFillColor(sf::Color(rand()%256, rand()%256, rand()%255));
+
     if(_type == "Cours_Courrier")
     {
         ifstream fichier("Avion.txt");
