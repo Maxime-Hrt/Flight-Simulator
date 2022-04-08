@@ -1,6 +1,7 @@
 #include "Classes.h"
 
-//cc
+
+
 void aeroport::afficheLesAvionSurPlace()
 {
     for(int m =0; m<AvionAuParking.size(); m++)
@@ -12,15 +13,14 @@ void aeroport::afficheLesAvionSurPlace()
 /// nouvelle methode
 std::vector<Avion> aeroport::partir(int depart,int arrive)
 {
-
+    bool Dispo;
     std::vector<Avion> AvionDispoPourTrajet;
 
     for(int x = 0;x<AvionAuParking.size();x++)
     {
-        std::cout<<"JE RENTRE ICI"<<std::endl;
         AvionAuParking[x].ParametrageGPSdijkstra();   // paramettre djikstra en fonction du type de l'avion
-        AvionAuParking[x].trajet_de_lavion(depart,arrive);
-        if(AvionAuParking[x].getPeutFaireVoyage() == 1)
+        Dispo = AvionAuParking[x].Verifietrajet_de_lavion(depart,arrive);
+        if(Dispo == 1)
         {
             AvionDispoPourTrajet.push_back(AvionAuParking[x]);
         }

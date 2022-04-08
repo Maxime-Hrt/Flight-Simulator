@@ -1,7 +1,7 @@
 #ifndef SWIMMING_POOL_CLASSES_H
 #define SWIMMING_POOL_CLASSES_H
 
-//cc
+
 
 
 #include <stdio.h>
@@ -43,7 +43,7 @@ private:
     int etat_avion;  ///0 au sol ; 1 en l'air ;
     vector<float> nbUT;
     vector<float> avencement_x, avencement_y;
-    bool PeutFaireVoyage;
+
 public:
     Avion();
     Avion(std::string type);
@@ -62,11 +62,7 @@ public:
     map<string,int> getEtatAvion();
     void ActualisationCompteurUTVOL();
     void ActualisationCompteurUTATTENTE();
-
-    bool getPeutFaireVoyage()
-    {
-        return PeutFaireVoyage;
-    }
+    bool Verifietrajet_de_lavion(int depart,int arrive);
 
     vector<int> getTrajet(){
         return trajet;

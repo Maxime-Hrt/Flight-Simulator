@@ -1,0 +1,21 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/HelloSFML.dir/Carte.cpp.o"
+  "CMakeFiles/HelloSFML.dir/Carte.cpp.o.d"
+  "CMakeFiles/HelloSFML.dir/Graphique.cpp.o"
+  "CMakeFiles/HelloSFML.dir/Graphique.cpp.o.d"
+  "CMakeFiles/HelloSFML.dir/aeroport.cpp.o"
+  "CMakeFiles/HelloSFML.dir/aeroport.cpp.o.d"
+  "CMakeFiles/HelloSFML.dir/avion.cpp.o"
+  "CMakeFiles/HelloSFML.dir/avion.cpp.o.d"
+  "CMakeFiles/HelloSFML.dir/main.cpp.o"
+  "CMakeFiles/HelloSFML.dir/main.cpp.o.d"
+  "CMakeFiles/HelloSFML.dir/sous_programmes.cpp.o"
+  "CMakeFiles/HelloSFML.dir/sous_programmes.cpp.o.d"
+  "HelloSFML"
+  "HelloSFML.pdb"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/HelloSFML.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()
