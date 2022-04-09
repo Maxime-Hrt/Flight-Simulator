@@ -238,6 +238,9 @@ void Carte::derouledujeu() {
                             // apres le parametrage nous mettron le bool TrajetDeCetteAvionEnregistre en true et quand le vecteur trajet de l'avion sera vide on remmetra ce bool en false
 
 
+
+
+
                             std::cout << "d'ou voulez vous partir : " << std::endl;
                             std::cout << " entrer 0 pour Paris" << std::endl;
                             std::cout << " entrer 1 pour Tallinn" << std::endl;

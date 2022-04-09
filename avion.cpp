@@ -28,11 +28,11 @@ Avion::Avion(std::string _type):type(_type)
     TrajetDeCetteAvionEnregistre = false;
 
 
-    ///Initialisation graphique
+    /// Initialisation graphique
     srand(time(NULL));
     sf::CircleShape shape(10.f);
     design = shape;
-    design.setFillColor(sf::Color(rand()%256, rand()%256, rand()%255));
+    design.setFillColor(sf::Color(rand()%256, rand()%256, rand()%256));
 
     if(_type == "Cours_Courrier")
     {
@@ -135,8 +135,6 @@ vector<int> Avion::display(int dist[], int par[], int end) {
     return trajet;
 }
 
-
-
 void Avion::ParametrageGPSdijkstra()
 {
     std::cout<<"le nom de fichier est:  "<<type<<std::endl;
@@ -165,7 +163,6 @@ void Avion::ParametrageGPSdijkstra()
     }
 
 }
-
 
 std::string Avion::getType()
 {
@@ -472,13 +469,11 @@ bool Avion::Verifietrajet_de_lavion(int depart,int arrive)
 
 }
 
-
-
-
 void Avion::setEtatAvion(map<string,int> MAJEtatAvion)
 {
     EtatAvion = MAJEtatAvion;
 }
+
 map<string,int> Avion::getEtatAvion()
 {
     return EtatAvion;
