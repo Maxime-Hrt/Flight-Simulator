@@ -30,11 +30,11 @@ std::vector<Avion> aeroport::partir(int depart,int arrive)
 
                 }
             }
+            if(ilestpasdispo == false)
+            {
+                AvionDispoPourTrajet.push_back(AvionAuParking[x]);
+            }
 
-        }
-        if(ilestpasdispo == false)
-        {
-            AvionDispoPourTrajet.push_back(AvionAuParking[x]);
         }
 
     }
@@ -52,6 +52,40 @@ std::vector<Avion> aeroport::partir(int depart,int arrive)
 
 void aeroport::icitoutcepasse()
 {
+
+
+    for(int w = 0;w<AvionAuParking.size();w++)
+    {
+        vector<float> UT1;
+        vector<int> trajetApresEscale;
+        UT1 = AvionAuParking[w].getnbUT();
+        if(UT1.size()!=0)
+        {
+            trajetApresEscale = AvionAuParking[w].getTrajet();
+            File_Atteente_Decolage.push_back(AvionAuParking[w]);
+            AvionAuParking.erase(AvionAuParking.begin()+w);
+        }
+        else if(UT1.size()==0)
+        {
+            AvionAuParking[w].setTrajetDeCetteAvionEnregistre(false);
+            AvionAuParking[w].resetTrajet();// si il y a un bug c surement ici
+        }
+    }
+/*
+    vector<float> UT1;
+    vector<int> trajetApresEscale;
+    UT1 = AvionEnVol[w].getnbUT()
+    if(UT1.size()!=0)
+    {
+        trajetApresEscale = AvionEnVol[w].getTrajet();
+        ToutLesAeroport[depart].decoler(stackAvionDispo[z]);
+    }
+   */
+
+
+
+
+
     std::cout<<"VOICI L'AVION QUI VA DECOLLER EST "<<std::endl;
     std::cout<<std::endl;
     //<<File_Atteente_Decolage[0].getNom()<<
@@ -91,6 +125,7 @@ void aeroport::icitoutcepasse()
 ///fonction modifier qui marche
     for(int y = 0;y<File_Atteente_Decolage.size();y++)// on regarde si l'avion peut decoler
     {
+
         nb_piste_utiliseATM = (atterissageEnCours.size()+decolageEnCours.size());
         map<string,int> EtatActuel;
         EtatActuel = File_Atteente_Decolage[y].getEtatAvion();
@@ -135,6 +170,20 @@ void aeroport::icitoutcepasse()
 
     for(int y = 0;y<decolageEnCours.size();y++)// on regarde si l'avion a fini de decoler
     {
+        vector<float> UT1;
+        vector<int> trajetApresEscale;
+        UT1 = decolageEnCours[y].getnbUT();
+        trajetApresEscale = decolageEnCours[y].getTrajet();
+        std::cout<<"MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM"<<std::endl;
+        for(int x=0;x<trajetApresEscale.size();x++)
+        {
+            std::cout<<trajetApresEscale[x]<<std::endl;
+        }
+        for(int x=0;x<UT1.size();x++)
+        {
+            std::cout<<UT1[x]<<std::endl;
+        }
+        std::cout<<"MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM"<<std::endl;
         map<string,int> EtatActuel;
         EtatActuel = decolageEnCours[y].getEtatAvion();
         std::cout<<"IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII"<<std::endl;
@@ -257,6 +306,7 @@ void aeroport::nettoyervecteurAvionADecoler()/// fonction a appeller apres Actua
 void aeroport::atterir(Avion Avion_en_Aterissage)
 {
     // il faudrai le supprimer du vecteur en vol quand on auras accès à celui-ci
+
     File_Atteente_Atterissage.push_back(Avion_en_Aterissage);
 }
 

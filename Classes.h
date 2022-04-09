@@ -1,6 +1,9 @@
 #ifndef SWIMMING_POOL_CLASSES_H
 #define SWIMMING_POOL_CLASSES_H
 
+//cc
+
+
 #include <stdio.h>
 #include <iostream>
 #include <fstream>
@@ -12,12 +15,13 @@
 #include <thread>
 #include <chrono>
 #include <SFML/Graphics.hpp>
-
 #define WIDTH 1707
 #define HEIGHT 1067
 using namespace std;
 
 ///nouveau
+
+
 
 class Avion
 {
@@ -81,6 +85,7 @@ public:
     }
 
 
+
     bool getTrajetDeCetteAvionEnregistre()
     {
         return TrajetDeCetteAvionEnregistre;
@@ -97,6 +102,9 @@ public:
     void setTrajet(vector<int> _trajet){
         trajet=_trajet;
     }
+    void resetTrajet(){
+        trajet.clear();
+    }
     void envol(){
         etat_avion=1;
     }
@@ -106,10 +114,13 @@ public:
     void setnbUT(float _nbUT){
         nbUT.push_back(_nbUT);
     }
+    void resetnbUT()
+    {
+        nbUT.clear();
+    }
     vector<float> getnbUT(){
         return nbUT;
     }
-
     void augmenteDistance(int i){
         loca_x += avencement_x[i];
         loca_y += avencement_y[i];
@@ -148,11 +159,10 @@ public:
     }
 
     void popFrontAvion(){
-        trajet.erase(trajet.begin());
+        //trajet.erase(trajet.begin());
         avencement_x.erase(avencement_x.begin());
         avencement_y.erase(avencement_y.begin());
-        nbUT.erase(nbUT.begin());
-
+        //nbUT.erase(nbUT.begin());
     }
 
 };
