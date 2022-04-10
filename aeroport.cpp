@@ -18,6 +18,8 @@ std::vector<Avion> aeroport::partir(int depart,int arrive)
 
     for(int x = 0;x<AvionAuParking.size();x++)
     {
+        bool verifLieux(false);
+
         vector<float> nbUT;
         vector<int> trajetencours;
         nbUT = AvionAuParking[x].getnbUT();
@@ -29,16 +31,18 @@ std::vector<Avion> aeroport::partir(int depart,int arrive)
         {
             if((nbUT.size()==0)&&(trajetencours.size() == 0))
             {
-                for(int h=0;h<File_Atteente_Decolage.size();h++)
+                verifLieux = true;
+            }
+            for(int h=0;h<File_Atteente_Decolage.size();h++)
+            {
+                if(AvionAuParking[x].getNom() == File_Atteente_Decolage[h].getNom())
                 {
-                    if(AvionAuParking[x].getNom() == File_Atteente_Decolage[h].getNom())
-                    {
-                        ilestpasdispo = true;
+                    ilestpasdispo = true;
 
-                    }
                 }
             }
-            if(ilestpasdispo == false)
+
+            if(!ilestpasdispo && verifLieux)
             {
                 AvionDispoPourTrajet.push_back(AvionAuParking[x]);
             }

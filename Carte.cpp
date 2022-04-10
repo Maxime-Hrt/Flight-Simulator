@@ -210,6 +210,10 @@ void Carte::derouledujeu() {
 /// ici je modifie
         switch (choixmenu) {
             case 1: {
+                for (int i = 0; i < ToutLesAeroport.size(); ++i) {
+                    ToutLesAeroport[i].initialiseDebutVol();
+                }
+
                 for(int y = 0;y<ToutLesAeroport.size();y++)
                 {
                     ToutLesAeroport[y].setPermDecoler(true);
@@ -451,7 +455,7 @@ void Carte::derouledujeu() {
                     /*
                     std::chrono::seconds dura( 1);
                     std::this_thread::sleep_for( dura );
-
+                    */
 
 
                     window.clear();
@@ -466,7 +470,7 @@ void Carte::derouledujeu() {
 
 
 
-                    IciToutCePasse();*/
+                    IciToutCePasse();
                 }
                 /// ici je peut recuperer nombre UT et le Trajet de l'avion
                 // si depart paris et arrivé sydney trajet = paris,dubai,sydney
