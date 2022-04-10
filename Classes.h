@@ -1,8 +1,6 @@
 #ifndef SWIMMING_POOL_CLASSES_H
 #define SWIMMING_POOL_CLASSES_H
 
-//cc
-
 
 #include <stdio.h>
 #include <iostream>
@@ -20,14 +18,10 @@
 #define HEIGHT 1067
 using namespace std;
 
-///nouveau
-
-
 
 class Avion
 {
 private:
-    /// nouveau
     map<string,int> EtatAvion; // Vol,Sol,Atterit,Decole,Attend,AccedePiste
     vector<Avion> AvionEnVOl;
     vector<Avion> AvionEnAttente;
@@ -50,6 +44,9 @@ private:
     int altitudeAvion;
     int CouleurAvion;
     sf::CircleShape design;
+    int reserveActuelCarburant;
+    bool fuiteReservoir;
+    int augmentationConsomation;
 
 public:
     Avion();
@@ -86,7 +83,9 @@ public:
     {
         return arrive;
     }
-
+    bool getEtatFuite(){
+        return fuiteReservoir;
+    }
 
 
     bool getTrajetDeCetteAvionEnregistre()
@@ -225,12 +224,53 @@ public:
                 if (type == "Long_Courrier")
                     design.setFillColor(sf::Color(255, 120, 120));
         }
+
+    }
+    void crashDesign(){
+        if (fuiteReservoir) {
+            design.setFillColor(sf::Color::Black);
+        }
+    }
+    void actualisationCarburantVol()
+    {
+        reserveActuelCarburant = reserveActuelCarburant-consomation;
+    }
+    void actualisationCarburantAttente()
+    {
+        reserveActuelCarburant = (reserveActuelCarburant)-((consomation/2)*(80/100));
+    }
+    void actualisationCarburantDecolage()
+    {
+        reserveActuelCarburant = reserveActuelCarburant;//-((consomation)*(30/100));
+    }
+    void actualisationCarburantAtterissage()
+    {
+        reserveActuelCarburant = (reserveActuelCarburant)-((consomation)*(120/100));
+    }
+    int getreserveActuelCarburant()
+    {
+        return reserveActuelCarburant;
+    }
+    void affichereserveActuelCarburant()
+    {
+        std::cout<<"Le carburant actuel dans "<<nomAvion<<" est de "<<reserveActuelCarburant<<std::endl;
+    }
+    void Fuitereservoir()
+    {
+        std::cout<<"Vous avez une fuite reservoir votre cosomation augmente de 40%"<<std::endl;
+        augmentationConsomation = consomation*(140/100)-(consomation);
+        consomation = consomation*(400/100);
+        fuiteReservoir = true;
+    }
+    void avionReparer()
+    {
+        fuiteReservoir = false;
+        consomation = consomation-augmentationConsomation;
+    }
+    void rechargeCarburantSol(){
+        reserveActuelCarburant = reservoir;
     }
 };
-///nouveau
-
-
-
 
 class aeroport{
 private:
@@ -262,7 +302,7 @@ private:
     std::vector<Avion> AvionAdecole;
     int altitude;
     int Couleur;
-    //
+
 public:
     aeroport();
     aeroport(int _num_sommet, string _nom, int _loca_x, int _loca_y, int _nb_piste, int _nb_places_sol, int _attente_sol, int _temps_acces_piste, int _temps_atter, int _anti_collision, int _boucle_attente, int _nb_arrete, map<string, int> _arrete);
@@ -349,7 +389,6 @@ public:
     std::map<int,int> greedyColoring();
 };
 
-
 class Carte{
 private:
     std::vector<aeroport> ToutLesAeroport;
@@ -360,8 +399,6 @@ public:
     void derouledujeu();
     std::map<int,int> initialisePowel();
 };
-
-
 
 
 string conversionSommetVille(int nombre);

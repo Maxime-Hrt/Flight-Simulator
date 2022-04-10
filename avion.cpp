@@ -42,6 +42,7 @@ Avion::Avion(std::string _type):type(_type)
             fichier >> consomation;
             fichier >> reservoir;
             fichier >> DistanceAutonomie;
+            reserveActuelCarburant = reservoir;
         }
         else {
             cout << "ERREUR: Impossible d'ouvrir le fichier." << endl;
@@ -67,6 +68,7 @@ Avion::Avion(std::string _type):type(_type)
             fichier >> consomation;
             fichier >> reservoir;
             fichier >> DistanceAutonomie;
+            reserveActuelCarburant = reservoir;
         }
         else {
             cout << "ERREUR: Impossible d'ouvrir le fichier." << endl;
@@ -97,6 +99,7 @@ Avion::Avion(std::string _type):type(_type)
             fichier >> consomation;
             fichier >> reservoir;
             fichier >> DistanceAutonomie;
+            reserveActuelCarburant = reservoir;
         }
         else {
             cout << "ERREUR: Impossible d'ouvrir le fichier." << endl;

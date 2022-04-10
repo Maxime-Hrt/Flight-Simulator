@@ -1,6 +1,4 @@
 #include "Classes.h"
-//cc
-
 string conversionSommetVille(int nombre){
     switch (nombre) {
         case 0:

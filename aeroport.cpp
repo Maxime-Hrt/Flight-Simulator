@@ -64,10 +64,10 @@ std::vector<Avion> aeroport::partir(int depart,int arrive)
 
 void aeroport::icitoutcepasse()
 {
-
-
     for(int w = 0;w<AvionAuParking.size();w++)
     {
+        AvionAuParking[w].avionReparer();
+        AvionAuParking[w].rechargeCarburantSol();
         vector<float> UT1;
         vector<int> trajetApresEscale;
         UT1 = AvionAuParking[w].getnbUT();
@@ -80,25 +80,20 @@ void aeroport::icitoutcepasse()
         else
         {
             AvionAuParking[w].setTrajetDeCetteAvionEnregistre(false);
-            AvionAuParking[w].resetTrajet();// si il y a un bug c surement ici
+            AvionAuParking[w].resetTrajet();
         }
     }
-/*
-    vector<float> UT1;
-    vector<int> trajetApresEscale;
-    UT1 = AvionEnVol[w].getnbUT()
-    if(UT1.size()!=0)
+
+    for(int y = 0;y<File_Atteente_Atterissage.size();y++)// on regarde si l'avion peut atterir
     {
-        trajetApresEscale = AvionEnVol[w].getTrajet();
-        ToutLesAeroport[depart].decoler(stackAvionDispo[z]);
-    }
-   */
 
+        /// CARSHHHH
+        /*
+        if (File_Atteente_Atterissage[y].getEtatFuite()){
+            std::swap(File_Atteente_Decolage[y], File_Atteente_Decolage[0]);
+        }*/
 
-
-    //<<File_Atteente_Decolage[0].getNom()<<
-    for(int y = 0;y<File_Atteente_Atterissage.size();y++)// on regarde si l'avioon peut atterir
-    {
+        decolageEnCours[y].actualisationCarburantAttente();
         nb_piste_utiliseATM = (atterissageEnCours.size()+decolageEnCours.size());
         nb_places_sol_DisponibleATM = (nb_places_sol-AvionAuParking.size());
         int nbPlacesDispoQuandLesAvionsAurontAtteris;
@@ -122,6 +117,7 @@ void aeroport::icitoutcepasse()
 
     for(int y = 0;y<atterissageEnCours.size();y++)// on regarde si l'avion à  atterit
     {
+        decolageEnCours[y].actualisationCarburantAtterissage();
         map<string,int> EtatActuel;
         EtatActuel = atterissageEnCours[y].getEtatAvion();
 
@@ -184,6 +180,7 @@ void aeroport::icitoutcepasse()
 
     for(int y = 0;y<decolageEnCours.size();y++)// on regarde si l'avion a fini de decoler
     {
+        decolageEnCours[y].actualisationCarburantDecolage();
         vector<float> UT1;
         vector<int> trajetApresEscale;
         UT1 = decolageEnCours[y].getnbUT();

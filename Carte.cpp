@@ -1,5 +1,5 @@
 #include "Classes.h"
-//cc
+
 void Carte::IciToutCePasse()
 {
     for(int y = 0;y<AvionEnVol.size();y++)/// ici on incremente le temps passer au sol par les avion
@@ -50,8 +50,6 @@ void Carte::IciToutCePasse()
                 AvionEnVol[y].setPositionDesign();
             }
         }
-
-
     }
 }
 
@@ -130,24 +128,12 @@ std::map<int,int> Carte::initialisePowel()
 
 
 
-
-
 void Carte::derouledujeu() {
-    /*
-    INITIALISATION DES GRAPHIQUES
-    sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "SFML Application");
-    sf::Texture imageFond_texture;
-    if(imageFond_texture.loadFromFile("/Users/maxime_hrt/Documents/Ing2/Informatique/Ing2Info/TheorieDesGraphes/Swimming_pool/Images/Carte.png", sf::IntRect(0, 0, WIDTH, HEIGHT))){
-        //Message d'erreur t'as vu
-    }
-    sf::Sprite imageFond;
-    imageFond.setTexture(imageFond_texture);
-    */
 
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Plateau de jeu"); //crÃ©ation de la window
     sf::Texture texture;
     if (!texture.loadFromFile(
-            "/Users/maxime_hrt/Documents/Ing2/Informatique/Ing2Info/TheorieDesGraphes/Swimming_pool/Images/Carte.png")) {
+            "/Users/maxime_hrt/Documents/Ing2/Informatique/Ing2Info/TheorieDesGraphes/Swimming_pool/Images/CarteGraph.png")) {
         std::cout << "probleme douverture de l'image\n";
     }
     sf::Sprite sprite;
@@ -157,7 +143,6 @@ void Carte::derouledujeu() {
     for(int y = 0;y<ToutLesAeroport.size();y++)
     {
         ToutLesAeroport[y].setCouleur(recevoirAeorportAltitude[y]);
-        //std::cout<<ToutLesAeroport[y].getCouleur()<<std::endl;
     }
     std::cout<<std::endl;
     for(int x = 0;x<recevoirAeorportAltitude.size();x++)
@@ -168,7 +153,6 @@ void Carte::derouledujeu() {
     for(int y = 0;y<ToutLesAeroport.size();y++)
     {
         ToutLesAeroport[y].setaltitude(recevoirAeorportAltitude[y]);
-        //std::cout<<ToutLesAeroport[y].getaltitude()<<std::endl;
     }
     std::vector <Avion> stackAvion;
     std::vector <Avion> stackAvion111;
@@ -178,8 +162,8 @@ void Carte::derouledujeu() {
     int choixmenu;
     std::string choixatterissage;
     std::string choixavion1;
-    /// faire un do while mais fleme je vais dodo
-
+    bool finJeu(true);
+    vector<Avion> AvionCrash;
 
 
     srand(time(NULL));
@@ -187,8 +171,8 @@ void Carte::derouledujeu() {
 
     while (window.isOpen()) {
     sf::Event event;
-    do {
         while (window.pollEvent(event)) {
+            do{
 
         std::cout << std::endl;
         std::cout << "=========================================Menu========================================="
@@ -204,12 +188,11 @@ void Carte::derouledujeu() {
         int FIN = 0;
         int compteur  = 0;
 
-        /// Tu verras plus tard
-        //choixmenu = 1;
 
 /// ici je modifie
         switch (choixmenu) {
             case 1: {
+
                 for (int i = 0; i < ToutLesAeroport.size(); ++i) {
                     ToutLesAeroport[i].initialiseDebutVol();
                 }
@@ -223,6 +206,11 @@ void Carte::derouledujeu() {
                     ToutLesAeroport[y].setCompteurPermDecoler(0);
                 }
                 while (compteur < 1000) {
+                    /*
+                    if (compteur%20 == 0 && (AvionEnVol.size() != 0)){
+                        AvionEnVol[0].Fuitereservoir();
+                    }*/
+
                     bool continuee = false;
                     int depart;
                     int arrive;
@@ -244,7 +232,6 @@ void Carte::derouledujeu() {
                             std::cout << " entrer 6 pour Dubai" << std::endl;
                             std::cout << " entrer 7 pour Santiago" << std::endl;
 
-                            /// A randomiser plus tard
                             std::cin >> depart;
                             std::cout << "ou voulez vous arrivez : " << std::endl;
                             std::cout << " entrer 0 pour Paris" << std::endl;
@@ -305,8 +292,6 @@ void Carte::derouledujeu() {
                             ToutLesAeroport[y].setCompteurPermDecoler(0);
                         }
                     }
-                    //////////////////////////////////////////////////
-                    ///ici jai modifier des truc
 
                     for (int w = 0; w < ToutLesAeroport.size(); w++) {
                         ToutLesAeroport[w].icitoutcepasse();
@@ -319,36 +304,6 @@ void Carte::derouledujeu() {
                         ToutLesAeroport[w].nettoyervecteurAvionADecoler();
                     }
 
-                    /*
-                    if (AvionEnVol.size() != 0) {
-                        std::cout << "==========================================" << std::endl;
-                        std::cout << "Avion Disponible Pour Atterissage" << std::endl;
-                        std::cout << "==========================================" << std::endl;
-                        for (int d = 0; d < AvionEnVol.size(); d++) {
-                            AvionEnVol[d].afficheAttribut();
-                            std::cout << std::endl;
-                        }
-                        std::cout
-                                << "entrer le nom de l'avion que voulez faire atterire (ce nom doit apparaitre dans la liste des avion disponible)"
-                                << std::endl;
-                        std::cin >> choixatterissage;
-                        for (int z = 0; z < AvionEnVol.size(); z++) {
-                            if (AvionEnVol[z].getNom() == choixatterissage) {
-                                ToutLesAeroport[0].atterir(
-                                        AvionEnVol[z]);// il atterit a paris automatiquement pour le moment
-                                AvionEnVol.erase(AvionEnVol.begin() + z);
-                            }
-                        }
-
-                    }
-                    */
-
-                    /*std::cout << "ENTRER 1 POUR ARRETER LA SIMULATION" << std::endl;
-                    std::cout << "ENTRER 0 POUR CONTINUER LA SIMULATION" << std::endl;
-                    std::cin >> FIN;*/
-
-                    ///
-                    //std::cout<<"LA BIZARERIE NEST JAMAIS FINI"<<std::endl;
 
 
                     // apres le parametrage nous mettron le bool TrajetDeCetteAvionEnregistre en true et quand le vecteur trajet de l'avion sera vide on remmetra ce bool en false
@@ -404,11 +359,24 @@ void Carte::derouledujeu() {
 
 
                     IciToutCePasse();
+
+                    /*
+                    for (int i = 0; i < AvionEnVol.size();++i) {
+                        AvionEnVol[i].crashDesign();
+                        if(AvionEnVol[i].getreserveActuelCarburant() <= 0){
+                            AvionCrash.push_back(AvionEnVol[i]);
+                            AvionEnVol.erase(AvionEnVol.begin() + i);
+                        }
+                    }
+                    */
+
                     std::cout<<"============================================="<<std::endl;
                     std::cout<<"AVION ACTUELLEMENT EN VOL"<<std::endl;
                     std::cout<<"============================================="<<std::endl;
                     for(int i = 0;i<AvionEnVol.size();i++)
                     {
+                        AvionEnVol[i].affichereserveActuelCarburant();
+                        AvionEnVol[i].actualisationCarburantVol();
                         std::map<string,int> tempo;
                         tempo = AvionEnVol[i].getEtatAvion();
                         std::cout<<AvionEnVol[i].getNom()<<" est en Vol depuis "<<tempo["Vol"]<<" UT est atterit a "<<" il vole a "<<AvionEnVol[i].getaltitudeAvion()<<" metre"<<" sa couleur est "<< AvionEnVol[i].getCouleurAvion()<<std::endl;//mettre le nombre d'ut à atteindre
@@ -417,45 +385,6 @@ void Carte::derouledujeu() {
                     // std::chrono::seconds dura(1);
                     //std::this_thread::sleep_for(dura);
                     compteur = compteur+1;
-
-                    ///A changer avec les UT
-                    /*
-                    for (int i = 0; i < AvionEnVol.size(); ++i) {
-                        if (((AvionEnVol[i].getX()-ToutLesAeroport[AvionEnVol[i].getTrajet()[1]].getLoca_x()) > -4
-                             && (AvionEnVol[i].getX()-ToutLesAeroport[AvionEnVol[i].getTrajet()[1]].getLoca_x()) < 4)
-                            &&((AvionEnVol[i].getY()-ToutLesAeroport[AvionEnVol[i].getTrajet()[1]].getLoca_y()) > -4
-                               && (AvionEnVol[i].getY()-ToutLesAeroport[AvionEnVol[i].getTrajet()[1]].getLoca_y()) < 4)){
-
-                            AvionEnVol[i].popFrontAvion();
-
-                            cout << "Loca X: " << AvionEnVol[i].getX() << endl;
-                            cout << "Loca Y: " << AvionEnVol[i].getY() << endl;
-                            for (int j = 0; j < AvionEnVol[i].getTrajet().size(); ++j) {
-                                cout << "Trajet " << j << " : " << AvionEnVol[i].getTrajet()[j] << endl;
-                            }
-                            cout << "Size : " << AvionEnVol[i].getTrajet().size();
-
-                            AvionEnVol[i].setLocaX(ToutLesAeroport[AvionEnVol[i].getTrajet()[0]].getLoca_x());
-                            AvionEnVol[i].setLocaY(ToutLesAeroport[AvionEnVol[i].getTrajet()[0]].getLoca_y());
-
-                            /// Si avion à l'aeroport alors il ne vole plus
-                            if (AvionEnVol[i].getTrajet().size() == 1){
-                                /// Aterrissage en de l'avion i
-                                AvionEnVol.erase(AvionEnVol.begin() + i);
-                            }
-                        }
-                        else {
-                            AvionEnVol[i].augmenteDistance(0);
-                            AvionEnVol[i].setPositionDesign();
-                        }
-
-                    }*/
-
-                    /// PAUSE
-                    /*
-                    std::chrono::seconds dura( 1);
-                    std::this_thread::sleep_for( dura );
-                    */
 
 
                     window.clear();
@@ -470,24 +399,13 @@ void Carte::derouledujeu() {
 
 
 
-                    IciToutCePasse();
+                    //IciToutCePasse();
                 }
-                /// ici je peut recuperer nombre UT et le Trajet de l'avion
-                // si depart paris et arrivé sydney trajet = paris,dubai,sydney
-                // vecteur[0] = paris
-                // vecteur[1] = dubai
-                // vecteur[2] = sydney
-                // vecteur[0] = 10   /// ici distance paris dubai
-                // vecteur[1] = 15   /// ici distance dubai sydney
-                //ne pas oublier de faire 1 seconde d'ecart entre chaque decollage
 
-
-                //stackAvion.clear();
-                //stackAvion[0].ParametrageGPSdijkstra();
-                //stackAvion[0].trajet_de_lavion();
             }
                 break;
             case 2: {
+
                 for (int i = 0; i < ToutLesAeroport.size(); ++i) {
                     ToutLesAeroport[i].initialiseDebutVol();
                 }
@@ -499,7 +417,11 @@ void Carte::derouledujeu() {
                 {
                     ToutLesAeroport[y].setCompteurPermDecoler(0);
                 }
-                while (compteur < 1000) {
+                while (compteur < 1000 && finJeu) {
+
+                    if (compteur%20 == 0 && (AvionEnVol.size() != 0)){
+                        AvionEnVol[0].Fuitereservoir();
+                    }
                     int nbAvionDispo;
                     int depart;
                     int arrive;
@@ -544,16 +466,7 @@ void Carte::derouledujeu() {
                             std::cout << stackAvionDispo[choixavion2].getdepart() << std::endl;
                             std::cout << stackAvionDispo[choixavion2].getarrive() << std::endl;
                             ToutLesAeroport[depart].decoler(stackAvionDispo[choixavion2]);
-                        } /*else if (nbAvionDispo > 1) {
-                                    choixavion2 = rand() % (nbAvionDispo - 1) + 0;
-                                    FinBoucleAlea = true;
-                                    std::cout << " ICI 2 " << choixavion2 << std::endl;
-                                    stackAvionDispo[choixavion2].setdepart(depart);
-                                    stackAvionDispo[choixavion2].setarrive(arrive);
-                                    std::cout << stackAvionDispo[choixavion2].getdepart() << std::endl;
-                                    std::cout << stackAvionDispo[choixavion2].getarrive() << std::endl;
-                                    ToutLesAeroport[depart].decoler(stackAvionDispo[choixavion2]);
-                                }*/
+                        }
 
 
                     }
@@ -579,8 +492,6 @@ void Carte::derouledujeu() {
                         }
                     }
 
-                    //////////////////////////////////////////////////
-
 
                     ///ici jai modifier des truc
                     for (int w = 0; w < ToutLesAeroport.size(); w++) {
@@ -593,37 +504,6 @@ void Carte::derouledujeu() {
                         AvionQuiVontEtreEnVol.clear();
                         ToutLesAeroport[w].nettoyervecteurAvionADecoler();
                     }
-
-                    /*
-                    if (AvionEnVol.size() != 0) {
-                        std::cout << "==========================================" << std::endl;
-                        std::cout << "Avion Disponible Pour Atterissage" << std::endl;
-                        std::cout << "==========================================" << std::endl;
-                        for (int d = 0; d < AvionEnVol.size(); d++) {
-                            AvionEnVol[d].afficheAttribut();
-                            std::cout << std::endl;
-                        }
-                        std::cout
-                                << "entrer le nom de l'avion que voulez faire atterire (ce nom doit apparaitre dans la liste des avion disponible)"
-                                << std::endl;
-                        std::cin >> choixatterissage;
-                        for (int z = 0; z < AvionEnVol.size(); z++) {
-                            if (AvionEnVol[z].getNom() == choixatterissage) {
-                                ToutLesAeroport[0].atterir(
-                                        AvionEnVol[z]);// il atterit a paris automatiquement pour le moment
-                                AvionEnVol.erase(AvionEnVol.begin() + z);
-                            }
-                        }
-
-                    }
-                    */
-
-                    //std::cout << "ENTRER 1 POUR ARRETER LA SIMULATION" << std::endl;
-                    //std::cout << "ENTRER 0 POUR CONTINUER LA SIMULATION" << std::endl;
-                    //std::cin >> FIN;
-
-                    ///
-                    //std::cout<<"LA BIZARERIE NEST JAMAIS FINI"<<std::endl;
 
 
                     // apres le parametrage nous mettron le bool TrajetDeCetteAvionEnregistre en true et quand le vecteur trajet de l'avion sera vide on remmetra ce bool en false
@@ -679,6 +559,8 @@ void Carte::derouledujeu() {
                     }
 
 
+
+
                     std::chrono::seconds dura(1);
                     std::this_thread::sleep_for(dura);
 
@@ -686,6 +568,9 @@ void Carte::derouledujeu() {
                     window.clear();
                     
                     IciToutCePasse();
+
+
+
 
                     //Les avions qui ne volle plus ne s'affiche plus (ILS SONT EN PANNE)
                     for (int i = 0; i < AvionEnVol.size(); ++i) {
@@ -695,15 +580,28 @@ void Carte::derouledujeu() {
                             AvionEnVol.erase(AvionEnVol.begin() + i);
                         }
                     }
-                    
+
+
                     window.draw(sprite);
                     for (int i = 0; i < AvionEnVol.size(); ++i) {
+                        AvionEnVol[i].crashDesign();
                         window.draw(AvionEnVol[i].getDesignAvion());
+
+
+                        if((AvionEnVol[i].getreserveActuelCarburant() <= 0 )&& AvionEnVol[i].getEtatFuite()){
+                            cout << "DANS BOUCLE DE CARBURANT " << AvionEnVol[i].getreserveActuelCarburant() << endl;
+                            AvionCrash.push_back(AvionEnVol[i]);
+                            AvionEnVol.erase(AvionEnVol.begin() + i);
+                        }
+                    }
+                    for (int i = 0; i < AvionCrash.size(); ++i) {
+                        window.draw(AvionCrash[i].getDesignAvion());
                     }
 
 
-
                     window.display();
+
+
 
 
 
@@ -712,6 +610,8 @@ void Carte::derouledujeu() {
                     std::cout<<"============================================="<<std::endl;
                     for(int i = 0;i<AvionEnVol.size();i++)
                     {
+                        AvionEnVol[i].affichereserveActuelCarburant();
+                        AvionEnVol[i].actualisationCarburantVol();
                         std::map<string,int> tempo;
                         tempo = AvionEnVol[i].getEtatAvion();
                         std::cout<<AvionEnVol[i].getNom()<<" est en Vol depuis "<<tempo["Vol"]<<" UT est atterit a "<<" il vole a "<<AvionEnVol[i].getaltitudeAvion()<<" metre"<<" sa couleur est "<< AvionEnVol[i].getCouleurAvion()<<std::endl;//mettre le nombre d'ut à atteindre
@@ -721,10 +621,10 @@ void Carte::derouledujeu() {
 
                     //IciToutCePasse();
 
+
                 }
 
             }
-
                 break;
             case 3: {
                 if (stackAvion.size() == 0) {
@@ -738,11 +638,13 @@ void Carte::derouledujeu() {
 
                 break;
 
-
         }
 
-        }
 
-    } while (choixmenu != 4);
+        }while (choixmenu != 4 && finJeu);
+
+    }
+        if (!finJeu)
+            window.close();
     }
 }
