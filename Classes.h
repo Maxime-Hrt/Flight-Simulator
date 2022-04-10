@@ -14,6 +14,7 @@
 #include <sstream>
 #include <thread>
 #include <chrono>
+#include <list>
 #include <SFML/Graphics.hpp>
 #define WIDTH 1707
 #define HEIGHT 1067
@@ -46,6 +47,8 @@ private:
     bool TrajetDeCetteAvionEnregistre;
     int depart;
     int arrive;
+    int altitudeAvion;
+    int CouleurAvion;
     sf::CircleShape design;
 
 public:
@@ -138,12 +141,12 @@ public:
     }
 
     void setPositionDesign(){
-        design.setPosition(loca_x, loca_y);
+          design.setPosition(loca_x, loca_y);
+    }
+    sf::CircleShape getDesignAvion(){
+          return design;
     }
 
-    sf::CircleShape getDesignAvion(){
-        return design;
-    }
     float getX(){
         return loca_x;
     }
@@ -164,7 +167,65 @@ public:
         avencement_y.erase(avencement_y.begin());
         //nbUT.erase(nbUT.begin());
     }
+    void setaltitudeAvion(int altitude1)
+    {
+        altitudeAvion = altitude1;
+    }
+    int getaltitudeAvion()
+    {
+        return altitudeAvion;
+    }
+    void setCouleurAvion(int Couleur1)
+    {
+        CouleurAvion = Couleur1;
+    }
+    int getCouleurAvion()
+    {
+        return CouleurAvion;
+    }
 
+    void setDesign(){
+        switch (CouleurAvion) {
+            //Bas
+            case 0:
+                if (type == "Cours_Courrier")
+                    design.setFillColor(sf::Color(200, 255, 200));
+                if (type == "Moyen_Courrier")
+                    design.setFillColor(sf::Color(200, 200, 255));
+                if (type == "Long_Courrier")
+                    design.setFillColor(sf::Color(255, 200, 200));
+                break;
+
+            //Haut
+            case 2:
+                if (type == "Cours_Courrier")
+                    design.setFillColor(sf::Color(70, 255, 70));
+                if (type == "Moyen_Courrier")
+                    design.setFillColor(sf::Color(70, 70, 255));
+                if (type == "Long_Courrier")
+                    design.setFillColor(sf::Color(255, 70, 70));
+                break;
+
+            //tres Haut
+            case 3:
+                if (type == "Cours_Courrier")
+                    design.setFillColor(sf::Color(0, 255, 0));
+                if (type == "Moyen_Courrier")
+                    design.setFillColor(sf::Color(0, 0, 255));
+                if (type == "Long_Courrier")
+                    design.setFillColor(sf::Color(255, 0, 0));
+                break;
+
+            // moyen
+            case 1:
+                if (type == "Cours_Courrier")
+                    design.setFillColor(sf::Color(120, 255, 120));
+                if (type == "Moyen_Courrier")
+                    design.setFillColor(sf::Color(120, 120, 255));
+                if (type == "Long_Courrier")
+                    design.setFillColor(sf::Color(255, 120, 120));
+        }
+    }
 };
 ///nouveau
 
@@ -184,6 +245,8 @@ private:
     int temps_atter;
     int anti_collision;
     int boucle_attente;
+    int CompteurPermissionDecolage;
+    bool PermDecoler;
 
     int nb_arrete;
     map<string, int> arrete;
@@ -197,6 +260,8 @@ private:
     std::vector<Avion> Accede_au_piste;
     //nouveau derniere version
     std::vector<Avion> AvionAdecole;
+    int altitude;
+    int Couleur;
     //
 public:
     aeroport();
@@ -220,8 +285,25 @@ public:
     //nouveau derniere version
     std::vector<Avion> ActualisationAvionDecoler();
     void nettoyervecteurAvionADecoler();
+    void initialiseDebutVol();
     //
     void icitoutcepasse();
+    void setaltitude(int altitude1)
+    {
+        altitude = altitude1;
+    }
+    int getaltitude()
+    {
+        return altitude;
+    }
+    void setCouleur(int Couleur1)
+    {
+        Couleur = Couleur1;
+    }
+    int getCouleur()
+    {
+        return Couleur;
+    }
     float getLoca_x(){
         return loca_x;
     }
@@ -231,6 +313,40 @@ public:
     int getDistance(string cle){
         return arrete[cle];
     }
+    void setPermDecoler(int Decoler)
+    {
+        PermDecoler = Decoler;
+    }
+    bool getPermDecoler()
+    {
+        return PermDecoler;
+    }
+    void setCompteurPermDecoler(int CompteurDecolage)
+    {
+        CompteurPermissionDecolage = CompteurDecolage;
+    }
+    int getCompteurPermDecoler()
+    {
+        return CompteurPermissionDecolage;
+    }
+};
+
+class Graph
+{
+    int V;
+    list<int> *adj;
+    std::map<int,int> sommetAltitude;
+
+public:
+
+    Graph(int V)   { this->V = V; adj = new list<int>[V]; }
+    ~Graph()       { delete [] adj; }
+
+
+    void addEdge(int v, int w);
+
+
+    std::map<int,int> greedyColoring();
 };
 
 
@@ -242,16 +358,18 @@ public:
     void IciToutCePasse();
     void initialiseAeroport();
     void derouledujeu();
+    std::map<int,int> initialisePowel();
 };
+
 
 
 
 string conversionSommetVille(int nombre);
 std::string choixavion();
 std::vector<aeroport> remplirAeroAleatoirement(std::vector<aeroport> ListeAeroport);
-/*void image(string image_path);
+void image(string image_path);
 void drawSprite(sf::Sprite image);
-sf::CircleShape afficherAvion(float x, float y);*/
+sf::CircleShape afficherAvion(float x, float y);
 
 
 #endif //SWIMMING_POOL_CLASSES_H

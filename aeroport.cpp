@@ -15,19 +15,27 @@ std::vector<Avion> aeroport::partir(int depart,int arrive)
     bool Dispo;
     std::vector<Avion> AvionDispoPourTrajet;
 
+
     for(int x = 0;x<AvionAuParking.size();x++)
     {
+        vector<float> nbUT;
+        vector<int> trajetencours;
+        nbUT = AvionAuParking[x].getnbUT();
+        trajetencours = AvionAuParking[x].getTrajet();
         bool  ilestpasdispo = false;
         AvionAuParking[x].ParametrageGPSdijkstra();   // paramettre djikstra en fonction du type de l'avion
         Dispo = AvionAuParking[x].Verifietrajet_de_lavion(depart,arrive);
         if(Dispo == 1)
         {
-            for(int h=0;h<File_Atteente_Decolage.size();h++)
+            if((nbUT.size()==0)&&(trajetencours.size() == 0))
             {
-                if(AvionAuParking[x].getNom() == File_Atteente_Decolage[h].getNom())
+                for(int h=0;h<File_Atteente_Decolage.size();h++)
                 {
-                    ilestpasdispo = true;
+                    if(AvionAuParking[x].getNom() == File_Atteente_Decolage[h].getNom())
+                    {
+                        ilestpasdispo = true;
 
+                    }
                 }
             }
             if(ilestpasdispo == false)
@@ -65,7 +73,7 @@ void aeroport::icitoutcepasse()
             File_Atteente_Decolage.push_back(AvionAuParking[w]);
             AvionAuParking.erase(AvionAuParking.begin()+w);
         }
-        else if(UT1.size()==0)
+        else
         {
             AvionAuParking[w].setTrajetDeCetteAvionEnregistre(false);
             AvionAuParking[w].resetTrajet();// si il y a un bug c surement ici
@@ -84,10 +92,6 @@ void aeroport::icitoutcepasse()
 
 
 
-
-
-    std::cout<<"VOICI L'AVION QUI VA DECOLLER EST "<<std::endl;
-    std::cout<<std::endl;
     //<<File_Atteente_Decolage[0].getNom()<<
     for(int y = 0;y<File_Atteente_Atterissage.size();y++)// on regarde si l'avioon peut atterir
     {
@@ -101,6 +105,9 @@ void aeroport::icitoutcepasse()
         std::cout<<"ici c nb piste dans aeroport "<<nb_piste<<std::endl;
         std::cout<<"ici nous avons valeur etat Attend "<<EtatActuel["Attend"]<<std::endl;
         std::cout<<"ici nous avons valeur etat Attend a atteindre avant atterissage "<<boucle_attente<<std::endl;
+        std::cout<<"c pour lavion "<<File_Atteente_Atterissage[y].getNom()<<" aeroport"<<nom<<boucle_attente<<std::endl;
+        std::cout<<"place dispo au sol "<<nb_places_sol_DisponibleATM<<std::endl;
+        std::cout<<"Piste atterissage utilise "<<atterissageEnCours.size()<<std::endl;
         if((EtatActuel["Attend"] >= boucle_attente)&&(nb_piste_utiliseATM<nb_piste)&&(nb_places_sol_DisponibleATM>0)&&(nb_places_sol_DisponibleATM>atterissageEnCours.size()))// si l'avion à attendu les UT necessaire pour atterire et qu'il y à une piste de libre et une place libre alors atterir
         {
             //nb_places_sol_DisponibleATM>atterissageEnCours.size() car des avions peuvent atterire entre temps
@@ -125,7 +132,6 @@ void aeroport::icitoutcepasse()
 ///fonction modifier qui marche
     for(int y = 0;y<File_Atteente_Decolage.size();y++)// on regarde si l'avion peut decoler
     {
-
         nb_piste_utiliseATM = (atterissageEnCours.size()+decolageEnCours.size());
         map<string,int> EtatActuel;
         EtatActuel = File_Atteente_Decolage[y].getEtatAvion();
@@ -159,8 +165,12 @@ void aeroport::icitoutcepasse()
         std::cout<<"ici c nb piste dans aeroport "<<nb_piste<<std::endl;
         std::cout<<"ici nous avons valeur etat sol "<<EtatActuel["AccedePiste"]<<std::endl;
         std::cout<<"ici nous avons valeur etat sol a atteindre avant decolage "<<temps_acces_piste<<std::endl;
-        if((EtatActuel["AccedePiste"] >= temps_acces_piste)&&(nb_piste_utiliseATM<nb_piste))// si il y a une piste libre alors on s'engage
+        if((EtatActuel["AccedePiste"] >= temps_acces_piste)&&(nb_piste_utiliseATM<nb_piste)&&(PermDecoler == true))// si il y a une piste libre alors on s'engage
         {
+            Accede_au_piste[y].setaltitudeAvion(altitude);
+            Accede_au_piste[y].setCouleurAvion(Couleur);
+            Accede_au_piste[y].setDesign();
+            PermDecoler = false;
             std::cout<<"NORMALEMENT JE DECOLE"<<std::endl;
             decolageEnCours.push_back(Accede_au_piste[y]);
             Accede_au_piste.erase(Accede_au_piste.begin()+y);
@@ -418,6 +428,10 @@ void aeroport::InitialiseAeroport()
     int nbAvionDansAreo = rand()%nb_places_sol +1;
     for(int x=0; x<nbAvionDansAreo; x++)
     {
+
+        std::chrono::seconds dura(1);
+        std::this_thread::sleep_for(dura);
+
         int TypeAvion = rand()%3 +1;
 
         if(TypeAvion == 1)
@@ -456,5 +470,15 @@ void aeroport::InitialiseAeroport()
             AvionInitialisation.setNom(nom+"Long_Courrier"+str);
             AvionAuParking.push_back(AvionInitialisation);
         }
+    }
+}
+
+void aeroport::initialiseDebutVol(){
+    for (int i = 0; i < AvionAuParking.size(); ++i) {
+        AvionAuParking[i].setLocaX(loca_x);
+        AvionAuParking[i].setLocaY(loca_y);
+        /*
+        AvionEnVol[y].setLocaX(ToutLesAeroport[AvionEnVol[y].getTrajet()[0]].getLoca_x());
+        AvionEnVol[y].setLocaY(ToutLesAeroport[AvionEnVol[y].getTrajet()[0]].getLoca_y());*/
     }
 }

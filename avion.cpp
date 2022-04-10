@@ -29,9 +29,7 @@ Avion::Avion(std::string _type):type(_type)
 
     /// Initialisation graphique
     srand(time(NULL));
-    sf::CircleShape shape(10.f);
-    design = shape;
-    design.setFillColor(sf::Color(rand()%256, rand()%256, rand()%256));
+
 
 
     if(_type == "Cours_Courrier")
@@ -48,6 +46,9 @@ Avion::Avion(std::string _type):type(_type)
         else {
             cout << "ERREUR: Impossible d'ouvrir le fichier." << endl;
         }
+        sf::CircleShape shape(10.f);
+        design = shape;
+        design.setFillColor(sf::Color::Green);
 
     }
     else if(_type == "Moyen_Courrier")
@@ -70,6 +71,9 @@ Avion::Avion(std::string _type):type(_type)
         else {
             cout << "ERREUR: Impossible d'ouvrir le fichier." << endl;
         }
+        sf::CircleShape shape(10.f);
+        design = shape;
+        design.setFillColor(sf::Color::Blue);
 
     }
     else if(_type == "Long_Courrier")
@@ -97,6 +101,9 @@ Avion::Avion(std::string _type):type(_type)
         else {
             cout << "ERREUR: Impossible d'ouvrir le fichier." << endl;
         }
+        sf::CircleShape shape(10.f);
+        design = shape;
+        design.setFillColor(sf::Color::Red);
 
     }
 }
