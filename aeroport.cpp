@@ -88,10 +88,7 @@ void aeroport::icitoutcepasse()
     {
 
         /// CARSHHHH
-        /*
-        if (File_Atteente_Atterissage[y].getEtatFuite()){
-            std::swap(File_Atteente_Decolage[y], File_Atteente_Decolage[0]);
-        }*/
+
 
         decolageEnCours[y].actualisationCarburantAttente();
         nb_piste_utiliseATM = (atterissageEnCours.size()+decolageEnCours.size());
@@ -99,7 +96,7 @@ void aeroport::icitoutcepasse()
         int nbPlacesDispoQuandLesAvionsAurontAtteris;
         map<string,int> EtatActuel;
         EtatActuel = File_Atteente_Atterissage[y].getEtatAvion();
-        std::cout<<"ON RENTRE ICI ?"<<std::endl;
+        /* std::cout<<"ON RENTRE ICI ?"<<std::endl;
         std::cout<<"ici c nb piste utiliser maintenant "<<nb_piste_utiliseATM<<std::endl;
         std::cout<<"ici c nb piste dans aeroport "<<nb_piste<<std::endl;
         std::cout<<"ici nous avons valeur etat Attend "<<EtatActuel["Attend"]<<std::endl;
@@ -107,6 +104,7 @@ void aeroport::icitoutcepasse()
         std::cout<<"c pour lavion "<<File_Atteente_Atterissage[y].getNom()<<" aeroport"<<nom<<boucle_attente<<std::endl;
         std::cout<<"place dispo au sol "<<nb_places_sol_DisponibleATM<<std::endl;
         std::cout<<"Piste atterissage utilise "<<atterissageEnCours.size()<<std::endl;
+         */
         if((EtatActuel["Attend"] >= boucle_attente)&&(nb_piste_utiliseATM<nb_piste)&&(nb_places_sol_DisponibleATM>0)&&(nb_places_sol_DisponibleATM>atterissageEnCours.size()))// si l'avion à attendu les UT necessaire pour atterire et qu'il y à une piste de libre et une place libre alors atterir
         {
             //nb_places_sol_DisponibleATM>atterissageEnCours.size() car des avions peuvent atterire entre temps
@@ -123,7 +121,7 @@ void aeroport::icitoutcepasse()
 
         if(EtatActuel["Atterit"] == temps_atter)// si l'avion à finit d'atterir alors
         {
-            std::cout<<"ON RENTRE ICI C CHAUD ATTENTION ?"<<std::endl;
+            // std::cout<<"ON RENTRE ICI C CHAUD ATTENTION ?"<<std::endl;
             AvionAuParking.push_back(atterissageEnCours[y]);
             atterissageEnCours.erase(atterissageEnCours.begin()+y);
         }
@@ -135,15 +133,16 @@ void aeroport::icitoutcepasse()
         nb_piste_utiliseATM = (atterissageEnCours.size()+decolageEnCours.size());
         map<string,int> EtatActuel;
         EtatActuel = File_Atteente_Decolage[y].getEtatAvion();
-        std::cout<<"ON RENTRE ICI ?"<<std::endl;
+        /* std::cout<<"ON RENTRE ICI ?"<<std::endl;
         std::cout<<"ici c nb piste utiliser maintenant "<<nb_piste_utiliseATM<<std::endl;
         std::cout<<"ici c nb piste dans aeroport "<<nb_piste<<std::endl;
         std::cout<<"ici nous avons valeur etat sol "<<EtatActuel["Sol"]<<std::endl;
         std::cout<<"ici nous avons valeur etat sol a atteindre avant decolage "<<attente_sol<<std::endl;
+         */
         if((nb_piste_utiliseATM<nb_piste)&&(EtatActuel["Sol"]>=attente_sol))// si la piste est libre alors avion decole
         {
             Accede_au_piste.push_back(File_Atteente_Decolage[y]);
-            std::cout<<"cette avion va ver la piste  "<<Accede_au_piste[0].getNom()<<std::endl;
+            //std::cout<<"cette avion va ver la piste  "<<Accede_au_piste[0].getNom()<<std::endl;
             for(int x =0;x<AvionAuParking.size();x++)
             {
                 if(File_Atteente_Decolage[y].getNom() == AvionAuParking[x].getNom())
@@ -160,18 +159,19 @@ void aeroport::icitoutcepasse()
         map<string,int> EtatActuel;
         EtatActuel = Accede_au_piste[y].getEtatAvion();
         nb_piste_utiliseATM = (atterissageEnCours.size()+decolageEnCours.size());
-        std::cout<<"ON RENTRE ICI ?"<<std::endl;
+        /*std::cout<<"ON RENTRE ICI ?"<<std::endl;
         std::cout<<"ici c nb piste utiliser maintenant "<<nb_piste_utiliseATM<<std::endl;
         std::cout<<"ici c nb piste dans aeroport "<<nb_piste<<std::endl;
         std::cout<<"ici nous avons valeur etat sol "<<EtatActuel["AccedePiste"]<<std::endl;
         std::cout<<"ici nous avons valeur etat sol a atteindre avant decolage "<<temps_acces_piste<<std::endl;
+         */
         if((EtatActuel["AccedePiste"] >= temps_acces_piste)&&(nb_piste_utiliseATM<nb_piste)&&(PermDecoler == true))// si il y a une piste libre alors on s'engage
         {
             Accede_au_piste[y].setaltitudeAvion(altitude);
             Accede_au_piste[y].setCouleurAvion(Couleur);
             Accede_au_piste[y].setDesign();
             PermDecoler = false;
-            std::cout<<"NORMALEMENT JE DECOLE"<<std::endl;
+            //std::cout<<"NORMALEMENT JE DECOLE"<<std::endl;
             decolageEnCours.push_back(Accede_au_piste[y]);
             Accede_au_piste.erase(Accede_au_piste.begin()+y);
         }
@@ -185,7 +185,7 @@ void aeroport::icitoutcepasse()
         vector<int> trajetApresEscale;
         UT1 = decolageEnCours[y].getnbUT();
         trajetApresEscale = decolageEnCours[y].getTrajet();
-        std::cout<<"MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM"<<std::endl;
+        //std::cout<<"MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM"<<std::endl;
         for(int x=0;x<trajetApresEscale.size();x++)
         {
             std::cout<<trajetApresEscale[x]<<std::endl;
@@ -194,15 +194,15 @@ void aeroport::icitoutcepasse()
         {
             std::cout<<UT1[x]<<std::endl;
         }
-        std::cout<<"MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM"<<std::endl;
+        //std::cout<<"MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM"<<std::endl;
         map<string,int> EtatActuel;
         EtatActuel = decolageEnCours[y].getEtatAvion();
-        std::cout<<"IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII"<<std::endl;
+        /*std::cout<<"IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII"<<std::endl;
         std::cout<<"etat decole : "<<EtatActuel["Decole"]<<std::endl;
-        std::cout<<"etat decole a atteindre : "<<temps_atter<<std::endl;
+        std::cout<<"etat decole a atteindre : "<<temps_atter<<std::endl;*/
         if(EtatActuel["Decole"] == temps_atter)// temp atterissage = temp decolage
         {
-            std::cout<<"jai decoler"<<std::endl;
+            //std::cout<<"jai decoler"<<std::endl;
             AvionAdecole.push_back(decolageEnCours[y]);
             ///AvionenVol.push_back(decolageEnCours[y]); on à pas de vecteur en vol donc on va juste le supprimer du vecteur decolage en cours et
             decolageEnCours.erase(decolageEnCours.begin()+y);
@@ -252,7 +252,7 @@ void aeroport::icitoutcepasse()
     }
     for(int y = 0;y<decolageEnCours.size();y++)/// ici on incremente le temps passer au Decole par les avion
     {
-        std::cout<<"je suis censé incrementé etat decolage"<<std::endl;
+        //std::cout<<"je suis censé incrementé etat decolage"<<std::endl;
         map<string,int> EtatActuel;
         EtatActuel = decolageEnCours[y].getEtatAvion();
         EtatActuel["Decole"] = EtatActuel["Decole"] + 1;
@@ -397,8 +397,8 @@ void aeroport::decoler(Avion Avion_en_Decolage)
             File_Atteente_Decolage.push_back(AvionAuParking[i]);
         }
     }
-    std::cout<<"VOICI L'AVION QUI VA DECOLLER EST "<<File_Atteente_Decolage[0].getNom()<<std::endl;
-    std::cout<<std::endl;
+    //std::cout<<"VOICI L'AVION QUI VA DECOLLER EST "<<File_Atteente_Decolage[0].getNom()<<std::endl;
+    //std::cout<<std::endl;
 }
 ///////===============================
 /// verifier cette fonction

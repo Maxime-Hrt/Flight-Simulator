@@ -140,10 +140,10 @@ public:
     }
 
     void setPositionDesign(){
-          design.setPosition(loca_x, loca_y);
+        design.setPosition(loca_x, loca_y);
     }
     sf::CircleShape getDesignAvion(){
-          return design;
+        return design;
     }
 
     float getX(){
@@ -195,7 +195,7 @@ public:
                     design.setFillColor(sf::Color(255, 200, 200));
                 break;
 
-            //Haut
+                //Haut
             case 2:
                 if (type == "Cours_Courrier")
                     design.setFillColor(sf::Color(70, 255, 70));
@@ -205,7 +205,7 @@ public:
                     design.setFillColor(sf::Color(255, 70, 70));
                 break;
 
-            //tres Haut
+                //tres Haut
             case 3:
                 if (type == "Cours_Courrier")
                     design.setFillColor(sf::Color(0, 255, 0));
@@ -215,7 +215,7 @@ public:
                     design.setFillColor(sf::Color(255, 0, 0));
                 break;
 
-            // moyen
+                // moyen
             case 1:
                 if (type == "Cours_Courrier")
                     design.setFillColor(sf::Color(120, 255, 120));
@@ -257,7 +257,7 @@ public:
     }
     void Fuitereservoir()
     {
-        std::cout<<"Vous avez une fuite reservoir votre cosomation augmente de 40%"<<std::endl;
+        std::cout<<nomAvion<<" a une fuite reservoir votre cosomation augmente de 40%"<<std::endl;
         augmentationConsomation = consomation*(140/100)-(consomation);
         consomation = consomation*(400/100);
         fuiteReservoir = true;
@@ -304,13 +304,16 @@ private:
     int Couleur;
 
 public:
+
     aeroport();
     aeroport(int _num_sommet, string _nom, int _loca_x, int _loca_y, int _nb_piste, int _nb_places_sol, int _attente_sol, int _temps_acces_piste, int _temps_atter, int _anti_collision, int _boucle_attente, int _nb_arrete, map<string, int> _arrete);
     ~aeroport();
     void remplirAvionParking(Avion Avion_Atterissant);
     int getternb_piste();
     int getternb_places_sol();
-    string getterNom();
+    string getterNom(){
+        return nom;
+    }
     int getNum_sommet();
     void atterir(Avion Avion_en_Aterissage);
     void afficheLesAvionSurPlace();
@@ -335,6 +338,26 @@ public:
     int getaltitude()
     {
         return altitude;
+    }
+    int gettempssol()
+    {
+        return attente_sol;
+    }
+    int getattenteaccesaupiste()
+    {
+        return temps_acces_piste;
+    }
+    int getTempsAtterisage()
+    {
+        return temps_atter;
+    }
+    int getDelaisAntiColision()
+    {
+        return anti_collision;
+    }
+    int getdelaisboucleattenteavantatterisage()
+    {
+        return boucle_attente;
     }
     void setCouleur(int Couleur1)
     {
